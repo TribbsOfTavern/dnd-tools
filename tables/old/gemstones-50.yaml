@@ -1,0 +1,34 @@
+---
+name: "50 GP Gemstones"
+table:
+  roll: "1d12"
+  result: 
+    1: "Bloodstone"
+    2: "Camelian"
+    3: "Chalcedony"
+    4: "Chrysoprase"
+    5: "Citrine"
+    6: "Jasper"
+    7: "Moonstone"
+    8: "Onyx"
+    9: "Quartz"
+    10: "Sardonyx"
+    11: "Star Rose Quartz"
+    12: "Zircon"
+
+
+---
+name: "50 GP Gemstone Desriptions"
+descriptions:
+  bloodstone: "opaque dark gray with red flecks"
+  camelian: "opaque orange to red-brown"
+  chalcedony: "opaque white"
+  chrysoprase: "translucent green"
+  citrine: "transparent pale yellow-brown"
+  jasper: "opaque blue, black, or brown"
+  moonstone: "transclucent white with pale blue glow"
+  onyx: "opaque bands of black and white, or pure black or white"
+  quartz: "transparent white, smoky gray, or yellow"
+  sardonyx: "opaque bands of red and white"
+  star-rose-quartz: "translucent rosy stone with white star-shaped center"
+  zircon: "transparent pale blue-green"

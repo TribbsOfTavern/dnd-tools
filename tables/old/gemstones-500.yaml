@@ -1,0 +1,21 @@
+---
+name: "500 GP Gemstones"
+table:
+  roll: "1d6"
+  result:
+    1: "Alexandrite"
+    2: "Aquamarine"
+    3: "Black Pearl"
+    4: "Blue Spinel"
+    5: "Peridot"
+    6: "Topaz"
+
+---
+name: "500 GP Gemstone Descriptions"
+descriptions:
+  alexandrite: "transparent dark green"
+  aquamarine: "transparent pale blue-green"
+  black-pearl: "opaque pure black"
+  blue-spinel: "transparent deep blue"
+  peridot: "transparent rich olive green"
+  topaz: "transparent golden yellow"

@@ -1,0 +1,15 @@
+---
+name: "25 GP Art Objects"
+table:
+  roll: "1d10"
+  result:
+    1: "Silver Ewer"
+    2: "Carved bone statuette"
+    3: "Small gold bracelet"
+    4: "Cloth-of-gold vestments"
+    5: "Black velvet mask with silver filigree"
+    6: "Copper chalice with silver filigree"
+    7: "Pair of engraved bone dice"
+    8: "Small mirror set in a painted wooded frame"
+    9: "Embroidered silk handkerchief"
+    10: "Gold locket with a painted portrait inside"

@@ -1,0 +1,17 @@
+---
+name: "5000 GP Gemstones"
+table: 
+  roll: "1d4"
+  result:
+    1: "Black Sapphire"
+    2: "Diamond"
+    3: "Jacinth"
+    4: "Ruby"
+
+---
+name: "5000 GP Gemstone Descriptions"
+descriptions:
+  black-sapphire: "translucent lustrous black with glowing highlights"
+  diamond: "transparent blue-whiote, canary, pink"
+  jacinth: "trasparent fiery orange"
+  ruby: "transparent clear red to deep crimson"

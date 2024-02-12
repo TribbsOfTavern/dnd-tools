@@ -1,0 +1,32 @@
+---
+name: "10 GP Gemstones"
+table:
+  roll: "1d12"
+  result:
+    1: "Azurite"
+    2: "Banded Agate"
+    3: "Blue Quartz"
+    4: "Eye Agate"
+    5: "Hematite"
+    6: "Lapis Lazuli"
+    7: "Malachite"
+    9: "Obsidian"
+    10: "Rhodochrosite"
+    11: "Tiger Eye"
+    12: "Turqoise"
+
+---
+name: "10 GP Gemstone Descriptions"
+descriptions:
+  azurite: "opaque mottled deep blue"
+  banded-agate: "translucent striped brown, blue, white, or red"
+  blue-quartz: "transparent pale blue"
+  eye-agate: "translucent circles of gray, white, brown, or green"
+  hematite: "opaque gray-black"
+  lapis-lazuli: "opaque light and dark blue with yellow flecks"
+  malachite: "opaque striated light and dark green"
+  moss-agate: "translucent pink or yellow-white with mossy gray or green markings"
+  obsidian: "opaque black"
+  rhodochrosite: "opaque light pink"
+  tiger-eye: "translucent brown with golden center"
+  turquoise: "opaque light blue-green"

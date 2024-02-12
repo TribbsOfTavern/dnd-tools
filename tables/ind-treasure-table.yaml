@@ -1,0 +1,1483 @@
+---
+table-name: "CR 0 Individual Treasure"
+required-tables: None
+roll: "1d100"
+result:
+  1:
+    - name: "copper"
+      amount: "5d6"
+      multiplier: 1
+  31:
+    - name: "silver"
+      amount: "4d6"
+      multiplier: 1
+  61:
+    - name: "electrum"
+      amount: "3d6"
+      multiplier: 1
+  71:
+    - name: "gold"
+      amount: "3d6"
+      multiplier: 1
+  96:
+    - name: "platinum"
+      amount: "1d6"
+      multiplier: 1
+
+---
+table-name: "CR 5 Individual Treasure"
+required-tables: None
+roll: "1d100"
+result:
+  1:
+    - name: "copper"
+      amount: "4d6"
+      multiplier: 100
+    - name: "electrum"
+      amount: "1d6"
+      multiplier: 10
+  31:
+    - name: "silver"
+      amount: "6d6"
+      multiplier: "10"
+    - name: "gold"
+      amount: "2d6"
+      multiplier: "10"
+  61:
+    - name: "electrum"
+      amount: "1d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+  71:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: "10"
+  96:
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 1
+
+---
+table-name: "CR 11 Individual Treasure"
+required-tables: None
+roll: "1d100"
+result:
+  1:
+    - name: "silver"
+      amount: "4d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "1d6"
+      multiplier: 100
+  21:
+    - name: "electrum"
+      amount: "1d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "1d6"
+      multiplier: 100
+  36:
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "1d6"
+      multiplier: 10
+  76:
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "2d6"
+      multiplier: 10
+
+---
+table-name: "CR 17 Individual Treasure"
+required-tables: None
+roll: "1d100"
+result:
+  1:
+    - name: "electrum"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "8d6"
+      multiplier: 100
+  16:
+    - name: "gold"
+      amount: "1d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "1d6"
+      multiplier: 100
+  56:
+    - name: "gold"
+      amount: "1d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "2d6"
+      multiplier: 100
+
+---
+table-name: "CR 0 Hoard Treasure"
+required-tables: None
+roll: "1d100"
+result:
+  1:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+  7:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "10 GP Gemstones"
+      roll-amount: "2d6"
+  17:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+  27:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "2d6"
+  37:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "10 GP Gemstones"
+      roll-amount: "2d6"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d6"
+  45:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d6"
+  53:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "2d6"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d6"
+  61:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "10 GP Gemstones"
+      roll-amount: "2d6"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d4"
+  66:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d4"
+  71:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "2d6"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d4"
+  76:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "10 GP Gemstones"
+      roll-amount: "2d6"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d4"
+  79:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d4"
+  81:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "2d6"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d4"
+  86:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d4"
+  93:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "2d6"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d4"
+  98:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d1"
+  100:
+    - name: "copper"
+      amount: "6d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "3d6"
+      multiplier: 100
+    - name: "gold"
+      amount: "2d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "2d6"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d1"
+
+---
+table-name: "CR 5 Hoard Treasure"
+required-table: None
+roll: "1d100"
+result:
+  1:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+  5:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+  11:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "3d6"
+  17:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "100 GP Gemstones"
+      roll-amount: "3d6"
+  23:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+  29:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d6"
+  33:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d6"
+  37:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "100 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d6"
+  41:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d6"
+  45:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d4"
+  50:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d4"
+  55:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "100 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d4"
+  60:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d4"
+  64:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d4"
+  67:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d4"
+  70:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "100 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d4"
+  73:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d4"
+  75:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d1"
+  77:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d1"
+  79:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "100 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d1"
+  80:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d1"
+  81:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "25 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d4"
+  85:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "50 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d4"
+  89:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "100 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d4"
+  92:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d4"
+  95:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "100 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d6"
+  97:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d6"
+  99:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "100 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table H"
+      roll-amount: "1d1"
+  100:
+    - name: "copper"
+      amount: "2d6"
+      multiplier: 100
+    - name: "silver"
+      amount: "2d6"
+      multiplier: 1000
+    - name: "gold"
+      amount: "6d6"
+      multiplier: 100
+    - name: "platinum"
+      amount: "3d6"
+      multiplier: 10
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table H"
+      roll-amount: "1d1"
+
+---
+table-name: "CR 11 Hoard Treasure"
+required-table: None
+roll: "1d100"
+result:
+  1:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+  4:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+  7:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "750 GP Art Objects"
+      roll-amount: "2d4"
+  11:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "500 GP Gemstones"
+      roll-amount: "3d6"
+  13:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+  16:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d6"
+  20:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100 
+    - roll-on: "750 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d6"
+  24:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "500 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d6"
+  27:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table A"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table B"
+      roll-amount: "1d6"
+  30:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d6"
+  36:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "750 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d6"
+  41:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "500 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d6"
+  46:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d6"
+  51:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d4"
+  55:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "750 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d4"
+  59:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "500 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d4"
+  63:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d4"
+  67: 
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table E"
+      roll-amount: "1d1"
+  69:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "750 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table E"
+      roll-amount: "1d1"
+  71:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "500 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table E"
+      roll-amount: "1d1"
+  73:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100 
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "1d1"
+  75:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d1"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d4"
+  77:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "750 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d1"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d4"
+  79:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "500 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d1"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d4"
+  81:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table F"
+      roll-amount: "1d1"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d4"
+  83:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table H"
+      roll-amount: "1d4"
+  86:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "750 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table H"
+      roll-amount: "1d4"
+  89:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "500 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table H"
+      roll-amount: "1d4"
+  91:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table H"
+      roll-amount: "1d4"
+  93:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "250 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table I"
+      roll-amount: "1d1"
+  95:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "750 GP Art Objects"
+      roll-amount: "2d4"
+    - roll-on: "Magic Item Table I"
+      roll-amount: "1d1"
+  97:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "500 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table I"
+      roll-amount: "1d1"
+  99:
+    - name: "gold"
+      amount: "4d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "5d6"
+      multiplier: 100
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table I"
+      roll-amount: "1d1
+    "
+
+---
+table-name: "CR 17 Hoard Treasure"
+required-tables: None
+roll: "1d100"
+results:
+  1:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+  3:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d8"
+  6:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "2500 GP Art Objects"
+      roll-amount: "1d10"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d8"
+  9: 
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "7500 GP Art Objects"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d8"
+  12:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "5000 GP Gemstones"
+      roll-amount: "1d8"
+    - roll-on: "Magic Item Table C"
+      roll-amount: "1d8"
+  15:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d6"
+  23:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "2500 GP Art Objects"
+      roll-amount: "1d10"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d6"
+  31:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "7500 GP Art Objects"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d6"
+  39:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "5000 GP Gemstones"
+      roll-amount: "1d8"
+    - roll-on: "Magic Item Table D"
+      roll-amount: "1d6"
+  47:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table E"
+      roll-amount: "1d6"
+  53:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "2500 GP Art Objects"
+      roll-amount: "1d10"
+    - roll-on: "Magic Item Table E"
+      roll-amount: "1d6"
+  59:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "7500 GP Art Objects"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table E"
+      roll-amount: "1d6"
+  64:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "5000 GP Gemstones"
+      roll-amount: "1d8"
+    - roll-on: "Magic Item Table E"
+      roll-amount: "1d6"
+  69:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d4"
+  70:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "2500 GP Art Objects"
+      roll-amount: "1d10"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d4"
+  71:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "7500 GP Art Objects"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d4"
+  72: 
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "5000 GP Gemstones"
+      roll-amount: "1d8"
+    - roll-on: "Magic Item Table G"
+      roll-amount: "1d4"
+  73:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table H"
+      roll-amount: "1d4"
+  75:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "2500 GP Art Objects"
+      roll-amount: "1d10"
+    - roll-on: "Magic Item Table H"
+      roll-amount: "1d4"
+  77:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "7500 GP Art Objects"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table H"
+      roll-amount: "1d4"
+  81: 
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "1000 GP Gemstones"
+      roll-amount: "3d6"
+    - roll-on: "Magic Item Table I"
+      roll-amount: "1d4"
+  86:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "2500 GP Art Objects"
+      roll-amount: "1d10"
+    - roll-on: "Magic Item Table I"
+      roll-amount: "1d4"
+  91:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "7500 GP Art Objects"
+      roll-amount: "1d4"
+    - roll-on: "Magic Item Table I"
+      roll-amount: "1d4"
+  96:
+    - name: "gold"
+      amount: "12d6"
+      multiplier: 1000
+    - name: "platinum"
+      amount: "8d6"
+      multiplier: 1000
+    - roll-on: "5000 GP Gemstones"
+      roll-amount: "1d8"
+    - roll-on: "Magic Item Table I"
+      roll-amount: "1d4"

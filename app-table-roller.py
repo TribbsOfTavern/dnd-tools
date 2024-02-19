@@ -19,7 +19,9 @@ class TableRoller():
         self.app_loaded_files = []
         self.app_loaded_tables = []
         self.app_selected_table = -1
+        self.app_current_table_info = None
 
+        # Window initialization file Loading
         self.initWindow()
         self.loadYamlFiles()
         self.loadTablesFromFiles()
@@ -105,7 +107,9 @@ class TableRoller():
 
     def menuDebugPrintSelectedTable(self) -> None:
         ''' print only the currently selected table '''
-        pass
+        self.app_current_table_info = self.app_loaded_tables[
+            self.app_selected_table]
+        print(self.app_current_table_info)
 
     def loadTablesFromFiles(self) -> None:
         ''' Load all tables within the loaded yaml files.  '''
@@ -129,9 +133,19 @@ class TableRoller():
     def eventTableSelection(self, event) -> None:
         ''' Populate info pane table with selected table results '''
         selection = self.listbox_tables.curselection()
-        self.app_selected_table = selection
-        self.info_pane_label.configure(text=self.listbox_tables.get(selection))
-
+        self.app_selected_table = self.app_loaded_tables[selection[0]]
+        
+        if "table-name" in self.app_selected_table:
+            for item in self.info_pane_table.get_children(): 
+                self.info_pane_table.delete(item)
+            self.info_pane_label.configure(
+                text=self.app_selected_table["table-name"])
+            for roll_result in self.app_selected_table.get('result', {}).items():
+                self.info_pane_table.insert('', 'end', values=(
+                    roll_result[0],
+                    roll_result[1]
+                ))
+        
     def run(self) -> None:
         ''' Run the application '''
         self.root.mainloop()

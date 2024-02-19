@@ -1,0 +1,70 @@
+---------------- Grouping Tests (re.match) -----------------
+r1d6      : ('1', '6', '', None, None, '', None, None)
+r2d6      : ('2', '6', '', None, None, '', None, None)
+r2d20kl1  : ('2', '20', 'kl1', 'kl', '1', '', None, None)
+r2d8kh1   : ('2', '8', 'kh1', 'kh', '1', '', None, None)
+r2d6+2    : ('2', '6', '+2', '+', '2', '', None, None)
+R1d15     : ('1', '15', '', None, None, '', None, None)
+r2d6kh1+2 : ('2', '6', 'kh1', 'kh', '1', '+2', '+', '2')
+r2d6kh+2  : ('2', '6', 'kh+2', 'kh+', '2', '', None, None)
+1d12      : None
+testing   : None
+          : None
+1F12      : None
+r2d6+1d4  : ('2', '6', '+1', '+', '1', 'd4', 'd', '4')
+----------------------- Roll Pattern Testing (re.search) -----------------------
+r1d6      : ('1', '6')
+r2d6      : ('2', '6')
+r2d20kl1  : ('2', '20')
+r2d8kh1   : ('2', '8')
+r2d6+2    : ('2', '6')
+R1d15     : ('1', '15')
+r2d6kh1+2 : ('2', '6')
+r2d6kh+2  : ('2', '6')
+1d12      : ('1', '12')
+testing   : None
+          : None
+1F12      : None
+r2d6+1d4  : ('2', '6')
+---------------------- Keeps Pattern Testing (re.search) -----------------------
+r1d6      : None
+r2d6      : None
+r2d20kl1  : ('kl', '1')
+r2d8kh1   : ('kh', '1')
+r2d6+2    : None
+R1d15     : None
+r2d6kh1+2 : ('kh', '1')
+r2d6kh+2  : None
+1d12      : None
+testing   : None
+          : None
+1F12      : None
+r2d6+1d4  : None
+---------------------- Math Modifier Testing (re.search) -----------------------
+r1d6      : None
+r2d6      : None
+r2d20kl1  : None
+r2d8kh1   : None
+r2d6+2    : ('+', '2')
+R1d15     : None
+r2d6kh1+2 : ('+', '2')
+r2d6kh+2  : ('+', '2')
+1d12      : None
+testing   : None
+          : None
+1F12      : None
+r2d6+1d4  : ('+', '1')
+---------------------- Roll Pattern Testing (re.findall) -----------------------
+r1d6      : [('1', '6')]
+r2d6      : [('2', '6')]
+r2d20kl1  : [('2', '20')]
+r2d8kh1   : [('2', '8')]
+r2d6+2    : [('2', '6')]
+R1d15     : [('1', '15')]
+r2d6kh1+2 : [('2', '6')]
+r2d6kh+2  : [('2', '6')]
+1d12      : [('1', '12')]
+testing   : []
+          : []
+1F12      : []
+r2d6+1d4  : [('2', '6'), ('1', '4')]

@@ -65,29 +65,56 @@ class TableRoller():
         # Table Selection List
         self.listbox_tables = tk.Listbox(self.root, width=30)
         self.listbox_tables.pack(side="left", fill="y", expand=False)
-
-        # Table Info Pane
-        self.info_pane = tk.Frame(self.root)
-        self.info_pane.pack(side="right", fill=tk.BOTH, expand=True)
+    
+        # Info Pane on the Right
+        self.app_info = ttk.Frame(self.root)
+        self.app_info.pack(fill="both", expand=True)
 
         # Info Pane Label
-        self.info_pane_label = tk.Label(self.info_pane, text="", height=1)
-        self.info_pane_label.pack(fill="x", expand=False)
-        
-        # Info Pane Table
-        self.info_pane_table = ttk.Treeview(
-            self.info_pane,
-            columns=("result", "desc"),
-            show="headings",
-            selectmode="browse"    
-        )
-        self.info_pane_table.heading("result", text="Result")
-        self.info_pane_table.heading("desc", text="Description")
-        self.info_pane_table.column("result", width=2)
-        self.info_pane_table.pack(fill=tk.BOTH, expand=True)
+        self.lbl_curr_table = ttk.Label(self.app_info, 
+            text="", 
+            justify="center", anchor="center")
+        self.lbl_curr_table.pack(side="top", fill="both")
+
+        # Info Pane Tabs
+        self.app_tabs = ttk.Notebook(self.app_info)
+        self.app_tabs.pack(fill=tk.BOTH, expand=True)
+
+        self.tab_table = ttk.Frame(self.app_tabs)
+        self.tab_results = ttk.Frame(self.app_tabs)
+        self.app_tabs.add(self.tab_table, text=f"{'Table Info':^20}")
+        self.app_tabs.add(self.tab_results, text=f"{'Roll Results':^20}")
+    
+        # Table Info Tab
+        self.tree_curr_table = ttk.Treeview(self.tab_table, columns=("Roll",
+            "Results"))
+        self.tree_curr_table.column("#0", width=0, stretch=False)
+        self.tree_curr_table.column("Roll", width=50, stretch=False)
+        self.tree_curr_table.column("Results")
+
+        self.tree_curr_table.heading("Roll", text="Roll")
+        self.tree_curr_table.heading("Results", text="Results")
+
+        self.tree_curr_table.pack(fill=tk.BOTH, expand=True)
+
+        # Roll Results Tab
+        """
+        - Log every rolled result as well as fill in any rolls on linked tales for the result, giving the full explanation. 
+        - Read only label, inset style
+        - Button to roll new results
+
+        """
+        self.text_res = tk.Text(self.tab_results, wrap="word")
+        self.btn_roll = tk.Button(self.tab_results, text="Roll New Result",
+            command=self.doNothing)
+        self.text_res.pack(side="top", expand=True, fill="both")
+        self.btn_roll.pack(side="bottom", fill="x")
+        # Make the text box read only and un editable
+        self.text_res.config(state="disabled")
 
         # Event Binds
         self.listbox_tables.bind("<<ListboxSelect>>", self.eventTableSelection)
+
 
     def doNothing(self) -> None:
         ''' Placeholder that does nothing '''
@@ -136,12 +163,12 @@ class TableRoller():
         self.app_selected_table = self.app_loaded_tables[selection[0]]
         
         if "table-name" in self.app_selected_table:
-            for item in self.info_pane_table.get_children(): 
-                self.info_pane_table.delete(item)
-            self.info_pane_label.configure(
+            for item in self.tree_curr_table.get_children(): 
+                self.tree_curr_table.delete(item)
+            self.lbl_curr_table.configure(
                 text=self.app_selected_table["table-name"])
             for roll_result in self.app_selected_table.get('result', {}).items():
-                self.info_pane_table.insert('', 'end', values=(
+                self.tree_curr_table.insert('', 'end', values=(
                     roll_result[0],
                     roll_result[1]
                 ))

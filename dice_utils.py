@@ -8,7 +8,7 @@ import re
 from typing import List, Dict, Union, Optional
 
 # Regularly used regex patterns
-re_rolls = re.compile("r(\d+)d(\d+)", re.IGNORECASE)
+re_rolls = re.compile("(\d+)d(\d+)", re.IGNORECASE)
 re_keeps = re.compile("(kh|kl)(\d+)", re.IGNORECASE)
 re_mods = re.compile("(\+|\-|\*|\/)(\d+)", re.IGNORECASE)
 
@@ -169,4 +169,4 @@ if __name__ == "__main__":
     ]
 
     for each in rolls:
-        print(sum_roll(each, True))
+        print(sum_roll(each))

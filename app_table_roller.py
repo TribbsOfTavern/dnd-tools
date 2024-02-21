@@ -10,6 +10,7 @@ import tkinter as tk
 from tkinter import ttk
 import yaml
 import glob
+import dice_utils as dice
 
 class TableRoller():
     def __init__(self) -> None:
@@ -98,15 +99,9 @@ class TableRoller():
         self.tree_curr_table.pack(fill=tk.BOTH, expand=True)
 
         # Roll Results Tab
-        """
-        - Log every rolled result as well as fill in any rolls on linked tales for the result, giving the full explanation. 
-        - Read only label, inset style
-        - Button to roll new results
-
-        """
         self.text_res = tk.Text(self.tab_results, wrap="word")
         self.btn_roll = tk.Button(self.tab_results, text="Roll New Result",
-            command=self.doNothing)
+            command=self.addResult)
         self.text_res.pack(side="top", expand=True, fill="both")
         self.btn_roll.pack(side="bottom", fill="x")
         # Make the text box read only and un editable
@@ -114,7 +109,6 @@ class TableRoller():
 
         # Event Binds
         self.listbox_tables.bind("<<ListboxSelect>>", self.eventTableSelection)
-
 
     def doNothing(self) -> None:
         ''' Placeholder that does nothing '''
@@ -144,11 +138,11 @@ class TableRoller():
             with open(file, 'r') as f:
                 data = list(yaml.load_all(f, Loader=yaml.FullLoader))
                 for table in data:
-                    self.app_loaded_tables.append(table)
+                    if 'table-name' in table:
+                        self.app_loaded_tables.append(table)
+                self.app_loaded_tables.append({'table-name': ""})
         ''' Add All tables names to the tables listbox '''
         for table in self.app_loaded_tables:
-            if 'name' in table:
-                self.listbox_tables.insert(tk.END, table['name'])
             if 'table-name' in table:
                 self.listbox_tables.insert(tk.END, table['table-name'])
 
@@ -163,16 +157,35 @@ class TableRoller():
         self.app_selected_table = self.app_loaded_tables[selection[0]]
         
         if "table-name" in self.app_selected_table:
-            for item in self.tree_curr_table.get_children(): 
-                self.tree_curr_table.delete(item)
-            self.lbl_curr_table.configure(
-                text=self.app_selected_table["table-name"])
-            for roll_result in self.app_selected_table.get('result', {}).items():
-                self.tree_curr_table.insert('', 'end', values=(
-                    roll_result[0],
-                    roll_result[1]
-                ))
-        
+            if self.app_selected_table['table-name'] != "":
+                for item in self.tree_curr_table.get_children(): 
+                    self.tree_curr_table.delete(item)
+                self.lbl_curr_table.configure(
+                    text=self.app_selected_table["table-name"])
+                for roll_result in self.app_selected_table.get('result', 
+                    {}).items():
+                    self.tree_curr_table.insert('', 'end', values=(
+                        roll_result[0],
+                        roll_result[1]
+                    ))
+    
+    def addResult(self) -> None:
+        roll = self.getRollResult()
+        result = self.app_selected_table['result'][roll]
+        msg = f"Rolled {roll} on {self.app_selected_table['table-name']}:\n"
+        msg += f"\t{result}\n"
+        self.text_res['state'] = 'normal'
+        self.text_res.insert('end lineend', msg)
+        self.text_res['state'] = 'disabled'
+        print(msg)
+
+
+    def getRollResult(self) -> int:
+        roll = self.app_selected_table['roll']
+        if roll == "length":
+            roll = f"1d{len(self.app_selected_table['result'])}"
+        return dice.sum_roll(roll)
+
     def run(self) -> None:
         ''' Run the application '''
         self.root.mainloop()

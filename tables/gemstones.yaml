@@ -1,132 +1,68 @@
+# 
+#   This is several tables containing the gemstone table rolls
+#
 ---
-name: "10 GP Gemstones"
-table:
-  roll: "1d12"
-  result:
-    1: "Azurite"
-    2: "Banded Agate"
-    3: "Blue Quartz"
-    4: "Eye Agate"
-    5: "Hematite"
-    6: "Lapis Lazuli"
-    7: "Malachite"
-    9: "Obsidian"
-    10: "Rhodochrosite"
-    11: "Tiger Eye"
-    12: "Turqoise"
+table-name: "10 GP Gemstones"
+roll: "1d12"
+result:
+  1: "Azurite"
+  2: "Banded Agate"
+  3: "Blue Quartz"
+  4: "Eye Agate"
+  5: "Hematite"
+  6: "Lapis Lazuli"
+  7: "Malachite"
+  9: "Obsidian"
+  10: "Rhodochrosite"
+  11: "Tiger Eye"
+  12: "Turqoise"
 
 ---
-name: "10 GP Gemstone Descriptions"
-descriptions:
-  azurite: "opaque mottled deep blue"
-  banded-agate: "translucent striped brown, blue, white, or red"
-  blue-quartz: "transparent pale blue"
-  eye-agate: "translucent circles of gray, white, brown, or green"
-  hematite: "opaque gray-black"
-  lapis-lazuli: "opaque light and dark blue with yellow flecks"
-  malachite: "opaque striated light and dark green"
-  moss-agate: "translucent pink or yellow-white with mossy gray or green markings"
-  obsidian: "opaque black"
-  rhodochrosite: "opaque light pink"
-  tiger-eye: "translucent brown with golden center"
-  turquoise: "opaque light blue-green"
+table-name: "50 GP Gemstones"
+roll: "1d12"
+result: 
+  1: "Bloodstone"
+  2: "Camelian"
+  3: "Chalcedony"
+  4: "Chrysoprase"
+  5: "Citrine"
+  6: "Jasper"
+  7: "Moonstone"
+  8: "Onyx"
+  9: "Quartz"
+  10: "Sardonyx"
+  11: "Star Rose Quartz"
+  12: "Zircon"
 
 ---
-name: "50 GP Gemstones"
-table:
-  roll: "1d12"
-  result: 
-    1: "Bloodstone"
-    2: "Camelian"
-    3: "Chalcedony"
-    4: "Chrysoprase"
-    5: "Citrine"
-    6: "Jasper"
-    7: "Moonstone"
-    8: "Onyx"
-    9: "Quartz"
-    10: "Sardonyx"
-    11: "Star Rose Quartz"
-    12: "Zircon"
+table-name: "500 GP Gemstones"
+roll: "1d6"
+result:
+  1: "Alexandrite"
+  2: "Aquamarine"
+  3: "Black Pearl"
+  4: "Blue Spinel"
+  5: "Peridot"
+  6: "Topaz"
 
 ---
-name: "50 GP Gemstone Desriptions"
-descriptions:
-  bloodstone: "opaque dark gray with red flecks"
-  camelian: "opaque orange to red-brown"
-  chalcedony: "opaque white"
-  chrysoprase: "translucent green"
-  citrine: "transparent pale yellow-brown"
-  jasper: "opaque blue, black, or brown"
-  moonstone: "transclucent white with pale blue glow"
-  onyx: "opaque bands of black and white, or pure black or white"
-  quartz: "transparent white, smoky gray, or yellow"
-  sardonyx: "opaque bands of red and white"
-  star-rose-quartz: "translucent rosy stone with white star-shaped center"
-  zircon: "transparent pale blue-green"
+table-name: "1000 GP Gemstones"
+roll: "1d8"
+result:
+  1: "Black Opal"
+  2: "Blue Sapphire"
+  3: "Emerald"
+  4: "Fire Opal"
+  5: "Opal"
+  6: "Star Ruby"
+  7: "Star Sapphire"
+  8: "Yellow Sapphire"
 
 ---
-name: "500 GP Gemstones"
-table:
-  roll: "1d6"
-  result:
-    1: "Alexandrite"
-    2: "Aquamarine"
-    3: "Black Pearl"
-    4: "Blue Spinel"
-    5: "Peridot"
-    6: "Topaz"
-
----
-name: "500 GP Gemstone Descriptions"
-descriptions:
-  alexandrite: "transparent dark green"
-  aquamarine: "transparent pale blue-green"
-  black-pearl: "opaque pure black"
-  blue-spinel: "transparent deep blue"
-  peridot: "transparent rich olive green"
-  topaz: "transparent golden yellow"
-
----
-name: "1000 GP Gemstones"
-table:
-  roll: "1d8"
-  result:
-    1: "Black Opal"
-    2: "Blue Sapphire"
-    3: "Emerald"
-    4: "Fire Opal"
-    5: "Opal"
-    6: "Star Ruby"
-    7: "Star Sapphire"
-    8: "Yellow Sapphire"
-
----
-name: "1000 GP Gemstone Descriptions"
-descriptions:
-  black-opal: "tanslucent dark green with black mottling and golden flecks"
-  blue-sapphire: "transparent blue-white to medium blue"
-  emerald: "transparent deep bright green"
-  fire-opal: "translucent fiery red"
-  opal: "translucent pale blue with green and golden mottling"
-  star-ruby: "transluvent ruby with white star-shaped center"
-  star-sapphire: "translucent blue sapphire with white star-shaped center"
-  yellow-sapphire: "transparent fiery yellow or yellow green"
-
----
-name: "5000 GP Gemstones"
-table: 
-  roll: "1d4"
-  result:
-    1: "Black Sapphire"
-    2: "Diamond"
-    3: "Jacinth"
-    4: "Ruby"
-
----
-name: "5000 GP Gemstone Descriptions"
-descriptions:
-  black-sapphire: "translucent lustrous black with glowing highlights"
-  diamond: "transparent blue-whiote, canary, pink"
-  jacinth: "trasparent fiery orange"
-  ruby: "transparent clear red to deep crimson"
+table-name: "5000 GP Gemstones"
+roll: "1d4"
+result:
+  1: "Black Sapphire"
+  2: "Diamond"
+  3: "Jacinth"
+  4: "Ruby"

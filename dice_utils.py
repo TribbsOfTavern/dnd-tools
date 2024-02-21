@@ -8,6 +8,8 @@ import re
 from typing import List, Dict, Union, Optional
 
 # Regularly used regex patterns
+re_notation = re.compile("(\d+)d(\d+)($|(\D+)(\d+))($|(\D+)(\d))",
+    re.IGNORECASE)
 re_rolls = re.compile("(\d+)d(\d+)", re.IGNORECASE)
 re_keeps = re.compile("(kh|kl)(\d+)", re.IGNORECASE)
 re_mods = re.compile("(\+|\-|\*|\/)(\d+)", re.IGNORECASE)
@@ -154,18 +156,28 @@ def sum_roll(rollnote:str, verbose:bool=False) -> Union[Dict, int]:
     else:
         return results['result']
 
+def is_valid(rollnote:str) -> bool:
+    """
+    Given a string, evaluate if it is a valid roll notation.
+
+    :param rollnote: The string of roll notation to be checked.
+    :return: True if the string is valid roll notation, False if the string
+    if not valid roll notation.
+    """
+    return True if re_notation.match(rollnote) else False
+
 # For testing
 if __name__ == "__main__":
     rolls = [
-        "r1d6",
-        "r4d6kh3",
-        "r2d20kl1",
-        "r2d8kh1",
-        "r2d6+2",
-        "r2d6kh1+2",
-        "r2d100kh1/2",
-        "r2d50kl1*3",
-        "r3d6-4"
+        "1d6",
+        "4d6kh3",
+        "2d20kl1",
+        "2d8kh1",
+        "2d6+2",
+        "2d6kh1+2",
+        "2d100kh1/2",
+        "2d50kl1*3",
+        "3d6-4"
     ]
 
     for each in rolls:

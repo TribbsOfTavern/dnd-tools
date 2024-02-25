@@ -29,7 +29,8 @@ class Table:
         self.name = loaded['table-name']
         self.roll = loaded['roll']
         self.results = loaded['result']
-        self.group = filename
+        if 'group' in loaded:
+            self.group = loaded['group']
 
     def getName(self) -> str:
         """
@@ -38,7 +39,15 @@ class Table:
         :return: A string containing the name of the table. 
         """
         return self.name
-    
+
+    def getGroup(self) -> str:
+        """
+        Return the group of the table.
+
+        :return: A string containing the group name of the table.
+        """
+        return self.group
+
     def getResult(self, x:int) -> str:
         """ 
         Given an integer, return the given result from the results dictionary.

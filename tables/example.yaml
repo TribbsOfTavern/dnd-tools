@@ -5,6 +5,7 @@
 # - This example shows the use of standard roll notation and standard results
 #   for the roll. All results must be entered.
 table-name: "Example Table 1"
+group: "examples"
 roll: "1d6"
 result:
   1: "Example A"
@@ -19,6 +20,7 @@ result:
 #   constantly changing the table, you can use 'length' to auto calculate the
 #   roll. Results must start from 1. All results must be entered
 table-name: "Example Table 2"
+group: "examples"
 roll: "length"
 result:
   1: "Example A"
@@ -34,6 +36,7 @@ result:
 # - Result 4 is an example of rolling again on a table without rerolling a third
 #   time.
 table-name: "Example Table 3"
+group: "examples"
 roll: "1d4"
 result:
   1: "Nothing linked"
@@ -46,6 +49,7 @@ result:
 # - Format must follow [<roll notation>] otherwise it will just output the 
 #   result as it is written in the result.
 table-name: "Example Table 4"
+group: "examples"
 roll: "1d4"
 result:
   1: "Example A: [2d12] Copper Coins" # roll 2d12

@@ -65,6 +65,14 @@ class Table:
         except Exception as e:
             print(e)
 
+    def getRollNote(self) -> str:
+        """
+        Return the roll notation for the table.
+
+        :return: A string containing the roll notation for the table.
+        """
+        return self.roll
+
     def getAllResults(self) -> dict:
         """
         Return the dictionary of results stored in the table.

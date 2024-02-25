@@ -10,7 +10,9 @@ import tkinter as tk
 from tkinter import ttk
 import yaml
 import glob
-import dice_utils as dice
+from table import Table, TableFormatError
+from dice_utils import sum_roll as rollDice
+from dice_utils import is_valid as isRollValid
 
 class TableRoller():
     def __init__(self) -> None:
@@ -133,19 +135,18 @@ class TableRoller():
         print(self.app_current_table_info)
 
     def loadTablesFromFiles(self) -> None:
-        ''' Load all tables within the loaded yaml files.  '''
+        ''' Load all table within the loaded yaml files. '''
         for file in self.app_loaded_files:
-            with open(file, 'r') as f:
-                data = list(yaml.load_all(f, Loader=yaml.FullLoader))
-                for table in data:
-                    if 'table-name' in table:
-                        self.app_loaded_tables.append(table)
-                self.app_loaded_tables.append({'table-name': ""})
-        ''' Add All tables names to the tables listbox '''
+            with open(file, "r") as fobj:
+                try:
+                    tables = list(yaml.load_all(fobj, Loader=yaml.FullLoader))
+                    for table in tables:
+                        self.app_loaded_tables.append(Table(file, table))
+                except Exception as e:
+                    print(e)
         for table in self.app_loaded_tables:
-            if 'table-name' in table:
-                self.listbox_tables.insert(tk.END, table['table-name'])
-
+            self.listbox_tables.insert(tk.END, table.getName())
+                    
     def loadYamlFiles(self, dir=".\\tables\\*.yaml") -> None:
         ''' Get all file names in the given directory. '''
         all_files = glob.glob(dir)
@@ -153,38 +154,70 @@ class TableRoller():
 
     def eventTableSelection(self, event) -> None:
         ''' Populate info pane table with selected table results '''
-        selection = self.listbox_tables.curselection()
-        self.app_selected_table = self.app_loaded_tables[selection[0]]
-        
-        if "table-name" in self.app_selected_table:
-            if self.app_selected_table['table-name'] != "":
-                for item in self.tree_curr_table.get_children(): 
-                    self.tree_curr_table.delete(item)
-                self.lbl_curr_table.configure(
-                    text=self.app_selected_table["table-name"])
-                for roll_result in self.app_selected_table.get('result', 
-                    {}).items():
-                    self.tree_curr_table.insert('', 'end', values=(
-                        roll_result[0],
-                        roll_result[1]
-                    ))
+        selection = self.listbox_tables.curselection()        
+        # Check if selection is different from previous selection
+        if self.app_selected_table != self.app_loaded_tables[selection[0]]:
+            # Set new selection
+            self.app_selected_table = self.app_loaded_tables[selection[0]]
+            # Remove items from selected table if they are different
+            for item in self.tree_curr_table.get_children():
+                self.tree_curr_table.delete(item)
+            # Add currently selected table name.
+            self.lbl_curr_table.configure(
+                text=self.app_selected_table.getName()
+            )
+            # Add New items into the list.
+            for res, val in self.app_selected_table.getAllResults().items():
+                self.tree_curr_table.insert("", "end", values=(
+                    res, val
+                ))
     
     def addResult(self) -> None:
-        roll = self.getRollResult()
-        result = self.app_selected_table['result'][roll]
-        msg = f"Rolled {roll} on {self.app_selected_table['table-name']}:\n"
+        """
+        Get a roll result and match it to the result in the currenttly selected
+        table. Then formate the information into a String and pass it along to
+        the logRolledResult() function.
+
+        :return: None
+        """
+        roll = rollDice(self.app_selected_table.getRollNote())
+        result = self.app_selected_table.getResult(roll)
+        msg = f"Rolled {roll} on {self.app_selected_table.getName()}:\n"
         msg += f"\t{result}\n"
+        self.logRolledResult(msg)
+
+    def logRolledResult(self, msg:str) -> None:
+        """
+        Updates the self.text_res Text widget with a log of the latest rolled
+        result.
+
+        :param msg: A string containing the result of the roll
+        :return: None
+        """
         self.text_res['state'] = 'normal'
         self.text_res.insert('end lineend', msg)
         self.text_res['state'] = 'disabled'
-        print(msg)
-
 
     def getRollResult(self) -> int:
+        """ TODO:
+        Needs error checking to make sure roll max never goes over the max of
+        the results.
+        """
         roll = self.app_selected_table['roll']
         if roll == "length":
             roll = f"1d{len(self.app_selected_table['result'])}"
-        return dice.sum_roll(roll)
+        return rollDice(roll)
+
+    def evalRollResult(self, res:str = "") -> dict:
+        """ Psudeo
+        Evaluating a result and look for roll notations and linked tables
+        format will either be [XdY], [X@T], or [XdY@T]
+        X - The number of rolls
+        Y - The max result
+        T - The Table Name
+        """
+        
+        pass
 
     def run(self) -> None:
         ''' Run the application '''

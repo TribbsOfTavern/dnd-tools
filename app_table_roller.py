@@ -10,6 +10,7 @@ import tkinter as tk
 from tkinter import ttk
 import yaml
 import glob
+from typing import Dict, Literal, Optional
 from table import Table, TableFormatError
 from dice_utils import sum_roll as rollDice
 from dice_utils import is_valid as isRollValid
@@ -198,26 +199,62 @@ class TableRoller():
         self.text_res.insert('end lineend', msg)
         self.text_res['state'] = 'disabled'
 
-    def getRollResult(self) -> int:
+    def rollOnTable(self) -> int:
         """ TODO:
         Needs error checking to make sure roll max never goes over the max of
         the results.
         """
-        roll = self.app_selected_table['roll']
-        if roll == "length":
-            roll = f"1d{len(self.app_selected_table['result'])}"
-        return rollDice(roll)
+        roll = Table.getRollNote()
 
-    def evalRollResult(self, res:str = "") -> dict:
-        """ Psudeo
-        Evaluating a result and look for roll notations and linked tables
-        format will either be [XdY], [X@T], or [XdY@T]
-        X - The number of rolls
-        Y - The max result
-        T - The Table Name
+        if roll == "length":
+            roll = f"1d{len(self.app_selected_table.getAllResults())}"
+
+        if isValidRoll(roll):
+            return rollDice(roll)
+        else:
+            return -1        
+
+    def findLinksInString(self, text:str) -> list[str]:
         """
-        
-        pass
+        Given a string, find all substrincs incased within brackes and return
+        them in a list.
+
+        :param text: A string to be checked for encased brackets.
+        :return: list of strings containing the parsed sub strings found within
+            the main string.
+        """ 
+        brackets = []
+        if "[" in text and "]" in text:
+            subs = [i for i, ch in enumerate(text) if ch == "[" or ch == "]"]
+        if brackets:
+            links = []
+            for i in range(0, len(brackets), 2):
+                try:
+                    links.append(text[brackets[i]:brackets[i+1]])
+                except:
+                    pass
+        return links
+
+    def parseTableLink(self, text:str) -> Dict[Literal['roll', 'table'], Optional[str]]:
+        """
+        Given a string, parse for a roll and table name with the formats:
+            X@Z Where X is the amount of rolls on the table, and Z is the Table,
+            - or - 
+            XdY@Z where X is the amount of rolls, Y is the the max result per
+            roll, and Z is the Table.
+
+        :param text: string to be parsed.
+        :return: dictionary containing necessary parsed data containing 'roll'
+        for the roll amount to be evaluated. and 'table' if there 
+        """ 
+        res = {"roll": None, "table": None}
+        s = text.split('@')
+        if len(s) == 1:
+            res['roll'] = s[0]
+        elif len(s) >=2:
+            res['roll'] = s[0]
+            res['table'] = s[1]
+        return res
 
     def run(self) -> None:
         ''' Run the application '''

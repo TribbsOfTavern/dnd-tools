@@ -2,6 +2,10 @@ class TableFormatError(Exception):
     """Raised when the table format is invalid."""
     pass
 
+class TableInlineLinkError(Exception):
+    """Raised when a table inline link format is invalid."""
+    pass
+
 class Table:
     def __init__(self, filename:str, loaded:dict) -> None:
         """
@@ -94,3 +98,24 @@ class Table:
         :return: an integer representing the length of the results dictionary.
         """
         return len(self.results)
+
+class TableLink:
+    def __init__(link_text:str=None, link_type:str=None, link_sum:int=None,
+    table:str=None):
+        """
+        Initialize a TableLink class that hold information about inline links
+        :param link_text: String. The original text of the inline link as str.
+        :param link_type: String. The type of inline table link, either 'roll' 
+        or 'table'
+        :param link_sum: Int. the sum of a roll or number of rolls on a table.
+        :param table: String. Name of the table being referenced.
+        :return: None
+        """
+        self.text = link_text
+        self.type = link_type
+        self.sum = link_sum
+        self.table = table
+        if self.type != 'roll' or self.type != 'table':
+            raise TableInlineLinkError('Table Inline Link Type must be either \'roll\' or \'table\'')
+
+

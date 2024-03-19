@@ -173,46 +173,39 @@ class TableRoller():
                     res, val
                 ))
     
-    def addResult(self) -> None:
+    def addResultToLog(self, table:Table, key:int) -> None:
         """
-        Get a roll result and match it to the result in the currenttly selected
-        table. Then formate the information into a String and pass it along to
-        the logRolledResult() function.
+        Given a table and a key, format a string to log the information to the 
+        'text_res' Text widget.
 
+        :param table: The table to get the result from.
+        :param key: The key pair for the value in the table results dictionary.
         :return: None
         """
-        roll = rollDice(self.app_selected_table.getRollNote())
-        result = self.app_selected_table.getResult(roll)
-        msg = f"Rolled {roll} on {self.app_selected_table.getName()}:\n"
+        msg = f"Rolled {key} on {table.getName()}:\n"
         msg += f"\t{result}\n"
-        self.logRolledResult(msg)
-
-    def logRolledResult(self, msg:str) -> None:
-        """
-        Updates the self.text_res Text widget with a log of the latest rolled
-        result.
-
-        :param msg: A string containing the result of the roll
-        :return: None
-        """
         self.text_res['state'] = 'normal'
         self.text_res.insert('end lineend', msg)
         self.text_res['state'] = 'disabled'
 
-    def rollOnTable(self) -> int:
-        """ TODO:
-        Needs error checking to make sure roll max never goes over the max of
-        the results.
+    def rollOnTable(self, table:Table, rolls:int=1) -> int:
+        """ 
+        Given a table, and amount of rolls, roll on the table for results from
+        the table.
+
+        :param table: The table to 
         """
-        roll = Table.getRollNote()
+        roll = table.getRollNote()
 
         if roll == "length":
-            roll = f"1d{len(self.app_selected_table.getAllResults())}"
+            roll = f"1d{len(table.getAllResults())}"
+        
+        if not isRollValid(roll):
+            return -1
 
-        if isValidRoll(roll):
-            return rollDice(roll)
-        else:
-            return -1        
+        for _ in range(rolls):
+            face = rollDice()
+
 
     def findLinksInString(self, text:str) -> list[str]:
         """

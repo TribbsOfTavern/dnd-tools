@@ -68,10 +68,15 @@ class Table:
     def getRollNote(self) -> str:
         """
         Return the roll notation for the table.
+        If the roll notation of the table is set to 'length' it should return
+        a string formatted to 1d<length of the results dict>
 
         :return: A string containing the roll notation for the table.
         """
-        return self.roll
+        if self.roll == "length":
+            return f"1d{str(len(self.results))}"
+        else:
+            return self.roll
 
     def getAllResults(self) -> dict:
         """

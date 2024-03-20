@@ -99,7 +99,7 @@ class Table:
         """
         return len(self.results)
 
-class TableLink:
+class InlineLink:
     def __init__(link_text:str=None, link_type:str=None, link_sum:int=None,
     table:str=None):
         """

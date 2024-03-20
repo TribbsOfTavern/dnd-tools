@@ -1,4 +1,5 @@
 from table import Table
+from table import InlineLink
 import dice_utils as dice
 import yaml
 import glob
@@ -15,17 +16,43 @@ def loadTablesFromYaml():
                 tables_dict[table['table-name']] = Table(file, table)
 
 def findLinksInString(text:str):
-    results = []
+    links = []
+    search = []
     brackets = []
     if '[' in text and ']' in text:
         brackets = [i for i, ch in enumerate(text) if ch == '[' or ch == ']']
     if brackets:
         for i in range(0, len(brackets), 2):
             try:
-                results.append(text[brackets[i]+1:brackets[i+1]])
+                search.append(text[brackets[i]+1:brackets[i+1]])
             except:
                 pass
-    return results
+    for text in search:
+        # Set the link text
+        l_text = text
+        # Set the link type
+        l_type = None
+        if "@" in text:
+            l_type = 'table'
+        elif dice.is_valid(text):
+            l_type = 'roll'
+        # Set the sum
+        l_sum = None
+        if l_type == 'roll' and dice.is_valid(text):
+            l_sum = dice.sum_roll(text)
+        if l_type == 'table':
+            split = text.split('@')
+            if split[0].isdigit(): l_sum = int(split[0])
+            elif dice.is_valid(split[0]): l_sum = dice.sum_roll(split[0])
+        # Set the table if there is any 
+        l_table = None
+        if l_type == 'table' and '@' in text:
+            split = text.split('@')
+            l_table = split[1]
+        link = TableLink(l_text, l_tpye, l_sum, l_table)
+        links.append(link)
+
+    return links
 
 # Retrieve Result
 #
@@ -45,19 +72,9 @@ def findLinksInString(text:str):
 def retrieveResult(table:Table, rolled:int):
     results = []
     currRes = table.getResults(rolled)
-    currResLinks = checkResultForLinks(currRes)
-
+    currResLinks = findLinksInString(currRes)
+    for link in currResLinks:
+        pass
+        
 def replaceRolls():
     pass
-
-def checkResultForLinks(text:str):
-    links = []
-    for link in findLinksInString(text):
-        l = {
-            'text': link,
-            'type': None,
-            'sum': None,
-            'table': None 
-        }
-        links.append(l)
-    

@@ -111,11 +111,18 @@ class InlineLink:
         :param table: String. Name of the table being referenced.
         :return: None
         """
-        self.text = link_text
+        self.text = line_text
         self.type = link_type
         self.sum = link_sum
         self.table = table
+        # Throw Errors if something is off.
         if self.type != 'roll' or self.type != 'table':
-            raise TableInlineLinkError('Table Inline Link Type must be either \'roll\' or \'table\'')
-
+            raise TableInlineLinkError(f"Inline-Link {self.text} my have type" + 
+            "'roll' or 'table'.")
+        if self.sum == None:
+            raise TableInlineLinkError(f"Link {self.text} has no sum. An " +
+             "integer must be provided.")
+        if self.text == None:
+            raise TableInlineLinkError(f"No inline link was provided. " + 
+            "Expected String containing original text.")
 

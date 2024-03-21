@@ -115,6 +115,7 @@ class InlineLink:
         self.type = link_type
         self.sum = link_sum
         self.table = table
+        self.results = []
         # Throw Errors if something is off.
         if self.type != 'roll' or self.type != 'table':
             raise TableInlineLinkError(f"Inline-Link {self.text} my have type" + 

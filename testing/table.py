@@ -100,8 +100,8 @@ class Table:
         return len(self.results)
 
 class InlineLink:
-    def __init__(link_text:str=None, link_type:str=None, link_sum:int=None,
-    table:str=None):
+    def __init__(self, link_text:str="", link_type:str="", link_sum:int=None,
+    table:str=""):
         """
         Initialize a TableLink class that hold information about inline links
         :param link_text: String. The original text of the inline link as str.
@@ -111,15 +111,15 @@ class InlineLink:
         :param table: String. Name of the table being referenced.
         :return: None
         """
-        self.text = line_text
-        self.type = link_type
+        self.text = link_text
+        self.type = link_type.lower()
         self.sum = link_sum
         self.table = table
         self.results = []
         # Throw Errors if something is off.
-        if self.type != 'roll' or self.type != 'table':
-            raise TableInlineLinkError(f"Inline-Link {self.text} my have type" + 
-            "'roll' or 'table'.")
+        if self.type != 'roll' and self.type != 'table':
+            raise TableInlineLinkError(f"Inline-Link {self.text} my have " + 
+            "type 'roll' or 'table'.")
         if self.sum == None:
             raise TableInlineLinkError(f"Link {self.text} has no sum. An " +
              "integer must be provided.")

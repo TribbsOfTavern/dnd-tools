@@ -16,6 +16,13 @@ def loadTablesFromYaml():
                 tables_dict[table['table-name']] = Table(file, table)
 
 def findLinksInString(text:str):
+    """
+    Find all the inline links within a result string and return them in order.
+    Inline links are expected to be within brackets '[' and ']'.
+    This function does not check if a table name is valid should one be provided.
+    :param text: String. The string that may contain inline links.
+    :return: List. Inline links as found within the 'text' string.
+    """
     links = []
     search = []
     brackets = []
@@ -30,12 +37,14 @@ def findLinksInString(text:str):
     for text in search:
         # Set the link text
         l_text = text
+
         # Set the link type
         l_type = None
         if "@" in text:
             l_type = 'table'
-        elif dice.is_valid(text):
+        elif dice.is_valid(l_text):
             l_type = 'roll'
+
         # Set the sum
         l_sum = None
         if l_type == 'roll' and dice.is_valid(text):
@@ -44,37 +53,60 @@ def findLinksInString(text:str):
             split = text.split('@')
             if split[0].isdigit(): l_sum = int(split[0])
             elif dice.is_valid(split[0]): l_sum = dice.sum_roll(split[0])
+
         # Set the table if there is any 
         l_table = None
         if l_type == 'table' and '@' in text:
             split = text.split('@')
             l_table = split[1]
-        link = TableLink(l_text, l_tpye, l_sum, l_table)
+
+        link = InlineLink(l_text, l_type, l_sum, l_table)
         links.append(link)
 
     return links
 
-# Retrieve Result
-#
-# Check Result For Rolls
-#
-# Replace Rolls with Roll Sum
-#
-# Check result for Link
-#    
-# If links exist
-#   Eval Link for roll amount and table name
-#
-# For each roll amount, Retrieve Results
-# If links do not exist
-#   Return all results as a list  
-
-def retrieveResult(table:Table, rolled:int):
+def retrieveResult(table:Table, rolled:int, depth:int=0):
+    # Retrieve Result
     results = []
-    currRes = table.getResults(rolled)
-    currResLinks = findLinksInString(currRes)
-    for link in currResLinks:
+    try:
+        res = table.getResult(rolled)
+    except:
         pass
-        
-def replaceRolls():
-    pass
+    results.append(res)
+    depth = depth
+
+    links = findLinksInString(table.getResult(rolled))
+
+
+    # DEBUGGING
+    if depth == 0:
+        pmsg = f"{'DEPTH':^7} | {'LINK TEXT':^19} | {'TYPE':^7} | {'SUM':^10} | "
+        pmsg += f"{'TABLE':^19} \n"
+    else:
+        pmsg = ""
+    for link in links:
+        pmsg += f"{depth:<7} | {link.text:19} | {link.type:7} | "
+        pmsg += f"{link.sum:<10} | {link.table if link.table else '':19}\n" 
+    print(pmsg)
+    # END DEBUGGING
+
+
+    for link in links:
+        if link.type == 'table':
+            t = retrieveTable(link.table)
+            if t: results.extend(retrieveResult(t, link.sum, depth + 1))
+
+
+    return results
+
+def  retrieveTable(table_name:str) -> Table:
+    return tables_dict[table_name] if table_name in tables_dict else None
+
+if __name__ == "__main__":
+    loadTablesFromYaml()
+
+    for i in range(1, 9):
+        msg = ' Test ' + str(i) + ' '
+        print(f"{msg:_^60}")
+        x = retrieveResult(tables_dict["Test Table A"], i)
+        print(x)

@@ -9,23 +9,24 @@ result:
   4: "Example 4: multiple inline links -> [1@Test Table B] [1@Test Table C]"
   5: "Example 5: mix of inline roll and link -> [1d6] [1@Test Table B]"
   6: "Example 6: inline link with embedded inline roll -> [2d4@Test Table B]"
-  7: "Example 8: inline roll with invalid roll notation -> [1f4]"
+  7: "Example 7: there is no link in this example"
+  8: "Example 8: inline roll with invalid roll notation -> [1f4]"
   
 ---
 table-name: "Test Table B"
 group: "examples"
 roll: "length"
 result:
-  1: ""
-  2: ""
-  3: ""
-  4: ""
+  1: "TB 1 -> [1d3+1@Test Table B]"
+  2: "TB 2 -> [1@Test Table C]"
+  3: "TB 3 -> [2@Test Table C]"
+  4: "TB 4 -> [1d3@Test Table C]"
 
 ---
 table-name: "Test Table C"
 group: "examples"
 roll: "1d3"
 result:
-  1: ""
-  2: ""
-  3: ""
+  1: "TC 1"
+  2: "TC 2"
+  3: "TC 3"

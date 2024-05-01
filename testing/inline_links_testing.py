@@ -67,6 +67,7 @@ def findLinksInString(text:str):
 
 def retrieveResult(table:Table, rolled:int, depth:int=0):
     # Retrieve Result
+    print_debug = False
     results = []
     try:
         res = table.getResult(rolled)
@@ -79,34 +80,53 @@ def retrieveResult(table:Table, rolled:int, depth:int=0):
 
 
     # DEBUGGING
-    if depth == 0:
-        pmsg = f"{'DEPTH':^7} | {'LINK TEXT':^19} | {'TYPE':^7} | {'SUM':^10} | "
-        pmsg += f"{'TABLE':^19} \n"
-    else:
-        pmsg = ""
-    for link in links:
-        pmsg += f"{depth:<7} | {link.text:19} | {link.type:7} | "
-        pmsg += f"{link.sum:<10} | {link.table if link.table else '':19}\n" 
-    print(pmsg)
+    if print_debug:
+        if depth == 0:
+            pmsg = f"{'DEPTH':^7} | {'LINK TEXT':^19} | {'TYPE':^7} | {'SUM':^10} |"
+            pmsg += f"{'TABLE':^19} \n"
+        else:
+            pmsg = ""
+        for link in links:
+            pmsg += f"{depth:<7} | {link.text:19} | {link.type:7} | "
+            pmsg += f"{link.sum:<10} | {link.table if link.table else '':19}\n" 
+        print(pmsg)
     # END DEBUGGING
 
 
     for link in links:
-        if link.type == 'table':
+        if link.type == 'table' and link.sum:
             t = retrieveTable(link.table)
-            if t: results.extend(retrieveResult(t, link.sum, depth + 1))
-
+            for i in range (0, link.sum):
+                if t: results.extend(retrieveResult(t, 
+                dice.sum_roll(t.getRollNote()), depth + 1))
 
     return results
 
 def  retrieveTable(table_name:str) -> Table:
     return tables_dict[table_name] if table_name in tables_dict else None
 
+def tableValidation() -> bool:
+    for name, table in tables_dict.items():
+        for i in range(1, len(table.results)):
+            print(f"{name} -> {table.getResult(i)}")
+            links = retrieveResult(table, i)
+            for link in links:
+                if link.type == 'table':
+                    pass
+                    
+
 if __name__ == "__main__":
     loadTablesFromYaml()
+    
+    tableValidation()
 
-    for i in range(1, 9):
-        msg = ' Test ' + str(i) + ' '
-        print(f"{msg:_^60}")
-        x = retrieveResult(tables_dict["Test Table A"], i)
-        print(x)
+    '''
+    #Test Example
+    test_table = "Test Table A"
+    test = 8
+    
+    x = retrieveResult(tables_dict[test_table], test)
+    msg = ' Test ' + str(test)
+    print(f"{msg:_^60}")
+    print(x , "\n")
+    '''

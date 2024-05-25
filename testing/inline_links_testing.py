@@ -110,10 +110,10 @@ def tableValidation() -> bool:
         for i in range(1, len(table.results)):
             print(f"{name} -> {table.getResult(i)}")
             links = retrieveResult(table, i)
-            for link in links:
-                if link.type == 'table':
-                    pass
-                    
+            for link in findLinksInString(links):
+                if not link.type:
+                    return False
+                      
 
 if __name__ == "__main__":
     loadTablesFromYaml()

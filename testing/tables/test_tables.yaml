@@ -2,7 +2,7 @@
 table-name: "Test Table A"
 group: "examples"
 roll: "length"
-result:
+results:
   1: "Example 1: single inline rolls -> [1d4]"
   2: "Example 2: single inline link -> [1@Test Table B]"
   3: "Example 3: multiple inline rolls -> [1d4] [2d6]"
@@ -16,7 +16,7 @@ result:
 table-name: "Test Table B"
 group: "examples"
 roll: "length"
-result:
+results:
   1: "TB 1 -> [1d3+1@Test Table B]"
   2: "TB 2 -> [1@Test Table C]"
   3: "TB 3 -> [2@Test Table C]"
@@ -26,7 +26,15 @@ result:
 table-name: "Test Table C"
 group: "examples"
 roll: "1d3"
-result:
+results:
   1: "TC 1"
   2: "TC 2"
   3: "TC 3"
+
+---
+table-name: "Fail Table"
+group: ""
+rol: "1d2"
+results:
+  1: "Foo"
+  2: "Bar"

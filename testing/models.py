@@ -2,11 +2,16 @@
     Object models to be used with Rabke Roller App.
     Hopefully Written in a way that can be expanded later.
 """
-from logger import setup_logger
+import logger
+import dice_utils
 
-main_logger, model_logger = setup_logger()
+main_logger, model_logger = logger.setup_logger()
 
 class Table:
+    """
+    Table instance to handle with all data partaining to tables. A loaded table
+    must be loaded from a properly formatted yaml file.
+    """
     def __init__(self, filename:str, loaded:dict) -> None:
         """
         Initialize A Table class containing the name, roll, results, and group
@@ -30,9 +35,9 @@ class Table:
 
     def __str__(self):
         """
-        Return all information about the table if called as a string."
+        Return all information about the table if called as a string.
         This is a formatted output instead of a long string of gabled text
-        making it easier to read the output of.
+        making it easier to read the output.
         :return: str. Formatted text containing all information about the table.
         """
         msg = f"Table: {self.name()}:^20\n"
@@ -146,16 +151,50 @@ class Table:
         return True
 
 class Result:
+    """
+    An instance of 
+    """
     def __init__(self, raw:str):
         """
         Initialize a result object that contains a key and 
         :param raw: String. containing the raw string of the result.
         """
-        # TODO:
-        # > Check for links in the result and store them
-        # > method for returning a 'rolled' result
         self._raw = raw
-        self._links = None
+        self._links = self._parseLinks(raw)
+
+    def __str__(self):
+        """
+        Get a long formatted string containing all the information about the
+            Result object. Formatted to readability.
+        :return: str. A formated string containing all information about Result.
+        """
+        msg = f"Raw: {self.raw}\n"
+        if not self._links:
+            msg += "Links: None\n"
+        else:
+            for l_text, l_type in self._links:
+                msg += f"{l_text}: {l_type}\n"
+        return msg
+
+    def _parseLinks(self, raw:str) -> dict:
+        """
+        Parse the raw sting for links and return a dictionary of them.
+        dictionary key, value returns on {raw link: Link object}
+        :return: dict. a dictionary of links within the raw string.
+        """
+        links = {}
+        search = []
+        brackets = []
+        if '[' in text and ']' in text:
+            brackets = [i for i, ch in enumerate(raw) if ch == '[' or ch == ']']
+        if brackets:
+            for i in range(0, len(brackets), 2):
+                try:
+                    search.append(text[brackets[i]+1:[i+1]])
+                except:
+                    pass
+        for found in search:
+            links[text] = Link(found)
 
     @property
     def raw(self):
@@ -173,37 +212,92 @@ class Result:
         """
         self._raw = x
 
+    def get() -> str:
+        """
+        Return a resolved result string.
+        :return: str. A String that has been resolved, including linked table
+        rolls and summed dice rolls.
+        """
+        # TODO: THIS
+        pass
+
 class Link:
-    def __init__(self, link_text:str="", link_type:str="", link_sum:int=None,
-    table:str=""):
+    """
+    Link object contains all information of a single stand alone roll or roll
+    on another table reference. A link has a type of either 'roll' or 'table'.
+    There will not be a reference to a Link of link_type 'roll'.
+    """
+    def __init__(self, text:str):
         """
         Initialize a TableLink class that hold information about inline links
         :param link_text: String. The original text of the inline link as str.
-        :param link_type: String. The type of inline table link, either 'roll' 
-        or 'table'
-        :param link_sum: Int. the sum of a roll or number of rolls on a table.
-        :param table: String. Name of the table being referenced.
-        :return: None
         """
-        # Throw errors if parameters are incorrect:
+        if not self._valid(text):
+            return
 
-        self.text = link_text
-        self.type = link_type if link_type else None
-        self.sum = link_sum
-        self.table = table
-        self.results = []
+        self._text = text
+        self._type = 'table' if '@' in text else 'roll'
+        self._roll = text if self._type == 'roll' else text.split('@')[0]
+        self._table = "" if self._type == 'roll' else text.split('@')[1]
+    
+    @property
+    def text(self) -> str:
+        return self._text
+
+    @property
+    def link_type(self) -> str:
+        return self._type
+
+    @property
+    def roll(self) -> str:
+        return self._roll
+
+    @property
+    def table(self) -> str:
+        return self._table
+
+    def _valid(self, x:str):
+        if not '@' in x or not dice_utils.is_valid(x):
+            main_logger.error(f"{x} is not a valid link format.")
+            return False
+        return True
+
+class Reslover:
+    """
+    Resolver takes the loaded dict of tables and is used to resolve rolled
+    results, including nested refereces. Generally only one instance of a
+    resolver should be needed for an app.
+    """
+    def __init__(self, tables: dict):
+        """
+        Initializing the resolver with a mapping of table names to Table
+        instances.
+        """
+        self._tables = tables
+
+    def get(self, result: Result) -> str:
+        """
+        Resolve a Result object, including any nested references.
+        :param result: The Results object to resolve.
+        :return: The resolved result string.
+        """
+        if not results.links:
+            return result.raw()
         
-        # TODO: Move All To Link Validation function
-        # Throw Errors if something is off.
-        if self.type != 'roll' and self.type != 'table':
-            raise TableInlineLinkError(f"Inline-Link {self.text} my have " + 
-            "type 'roll' or 'table'.")
-        if self.sum == None:
-            raise TableInlineLinkError(f"Link {self.text} has no sum. An " +
-             "integer must be provided.")
-        if self.text == None:
-            raise TableInlineLinkError(f"No inline link was provided. " + 
-            "Expected String containing original text.")
+        resolved_link = []
+        for link in results.links:
+            if link.link_type == 'roll':
+                # TODO --  Return the raw and result of the roll as dict
+                pass
+            elif link.link_type == 'table':
+                # TODO -- Check this code to make sure it works fine.
+                # Currently doesnt account for multiple rolls on a table.
+                referenced_table = self.tables[link.table]
+                referenced_roll = link.roll # roll needs to be summed by dice utils
+                referenced_result = referenced_table.getResult(referenced_roll)
+                resolved_link = self.get(referenced_result)
+                resolved_links.append(resolved_link)
+
 
 """
     Custom Errors Relating To Models objects
@@ -214,4 +308,4 @@ class TableFormatError(Exception):
 
 class TableInlineLinkError(Exception):
     """Raised when a table inline link format is invalid."""
-    pass
+    pass 

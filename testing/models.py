@@ -152,7 +152,9 @@ class Table:
 
 class Result:
     """
-    An instance of 
+    Result object handles all data regarding a result including linked
+    references on other tables, and in-line rolls. This information is stored in
+    created Link objects.
     """
     def __init__(self, raw:str):
         """
@@ -298,6 +300,11 @@ class Reslover:
                 resolved_link = self.get(referenced_result)
                 resolved_links.append(resolved_link)
 
+    def update(self, tables:dict):
+        """
+        Update the table dictionary for the Resolver object.
+        """
+        if not tables == self._tables: self._tables = tables
 
 """
     Custom Errors Relating To Models objects

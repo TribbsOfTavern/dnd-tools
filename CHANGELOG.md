@@ -1,6 +1,7 @@
 ## 6/1/2024
 - FileHandler: added verifying for file format and file exists
 - FileHandler: added _readYamlToDict(), _readJsonToDict(), _readTextToDict()
+- Filehandler: added loadFile(), loadFiles
 
 ## 5/30/2024
 - file_handler.py created to handle file specific tasks.

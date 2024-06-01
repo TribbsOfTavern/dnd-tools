@@ -14,4 +14,9 @@ def setup_logger():
     models_logger.setLevel(logging.DEBUG)
     models_logger.addHandler(handler)
 
-    return main_logger, model_logger 
+    #FileHandler logger
+    fhandler_logger = logging.getLogger("TableRollerApp.FileHandler")
+    fhandler_logger.setLevel(logging.DEBUG)
+    fhandler_logger.addHandler(handler)
+
+    return main_logger, model_logger, fhandler_logger

@@ -5,7 +5,7 @@
 import logger
 import dice_utils
 
-main_logger, model_logger = logger.setup_logger()
+main_logger, model_logger, fhandler_logger = logger.setup_logger()
 
 class Table:
     """
@@ -206,7 +206,7 @@ class Result:
         """
         return self.raw
 
-    @key.setter
+    @raw.setter
     def raw(self, x:str) -> None:
         """
         Set the raw result string of the Result object.
@@ -241,7 +241,7 @@ class Link:
         self._type = 'table' if '@' in text else 'roll'
         self._roll = text if self._type == 'roll' else text.split('@')[0]
         self._table = "" if self._type == 'roll' else text.split('@')[1]
-    
+
     @property
     def text(self) -> str:
         return self._text
@@ -290,7 +290,12 @@ class Reslover:
         for link in results.links:
             if link.link_type == 'roll':
                 # TODO --  Return the raw and result of the roll as dict
-                pass
+                if link.text.is_digit():
+                    # Amount of rolls
+                    pass
+                else:
+                    # Roll notation to determin
+                    pass
             elif link.link_type == 'table':
                 # TODO -- Check this code to make sure it works fine.
                 # Currently doesnt account for multiple rolls on a table.

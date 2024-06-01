@@ -26,6 +26,8 @@ class FileHandler:
         self._working_dir = current_dir
         self._exts = ['yaml', 'json', 'txt']
 
+        fhandler_logger.debug("FileHandler initialized.")
+
     @property
     def dir(self):
         return self._working_dir
@@ -74,17 +76,34 @@ class FileHandler:
         all_dicts = []
         for file in all_files:
             if file.split('.')[-1] in self._exts:
+                fhandler_logger.debug(f"Loaded {file}")
                 all_dicts.append(self.loadFile(file, d))
         
         return all_dicts
 
-    def writeFile(self, filename:str, dir:str=None) -> None:
-        # TODO --
-        pass
-
-    def createFile(self, filename, dir=None) -> None:
-        # TODO --
-        pass
+    def writeFile(self, output:dict, filename:str,
+        dir:str="", format: str = "yaml") -> None:
+        """
+        Given a dictionary, filename, and optionally a directory, save a the 
+        dictionary to a file. This can overwrite existing files.
+        :param output: dict. The dictionary to be saved.
+        :param filename: str. Name of the file to save dictionarty to.
+        :opt param dir: str. Path of the directory to save dictionary to.
+        """
+        path = os.path.join(dir, filename)
+        try:
+            with open(path, 'w') as file:
+                if format.lower() == 'yaml':
+                    yaml.dump(output, file, default_flow_style=False)
+                elif format.lower() == 'json':
+                    json.dump(output, file, indent=4)
+                elif format.lower() == 'txt':
+                    file.write(output)
+                else:
+                    main_logger.error(f"{filename.split('.')[-1]} is an invalid"
+                    + f" file extention. Please use one of {''.join(self._exts, ',')}")
+        except IOError as e:
+            filehandler_logger.error(f"Failed to write to file {path}: {e}")
 
     def verifyFileFormat(self, filename:str) -> bool:
         """

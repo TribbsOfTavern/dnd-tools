@@ -2,10 +2,12 @@
 - FileHandler: added verifying for file format and file exists
 - FileHandler: added _readYamlToDict(), _readJsonToDict(), _readTextToDict()
 - Filehandler: added loadFile(), loadFiles
+- FileHandler: added writeFile()
+- FileHandler: Removed createFile(), as writeFile() can both create and overwrite files.
 
 ## 5/30/2024
-- file_handler.py created to handle file specific tasks.
-- fhandler logger added
+- FileHandler: file_handler.py created to handle file specific tasks.
+- logger: fhandler logger added
 
 ## 5/29/2024
 - Remembered I created a change log.

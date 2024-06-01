@@ -35,6 +35,15 @@ class FileHandler:
         self._working_dir = dir
 
     def loadFile(self, filename, dir="") -> dict:
+        """
+        Given a filename and optionally a directory, read the file in and parse
+        the data into a dictionary to be returned.
+        :param filename: str. Name of the file to read.
+        :opt param dir: str. Default is FileHandler._working_dir. Directory to 
+        check for the file.
+        :return: dict. Dictionary containing the file contents. Returns empty 
+        dictionary if there is an error reading, or no file is found.
+        """
         d = self._working_dir if not dir else dir
         path = os.path.join(d, filename)
 
@@ -51,11 +60,25 @@ class FileHandler:
         if ext == 'txt':
             in_data = self._readTextToDict()
 
+        return in_data
+
     def loadFiles(self, dir="") -> list:
+        """
+        Given a directory path, read in all files within the dir and attempt to
+        read all the files into a list as dictionarys and return that list.
+        :param dir: str. Path to the directory to load files from.
+        :return: list. List of dictionaries read in from files.
+        """
         d = self._working_dir if not dir else dir
         all_files = glob.glob(dir)
+        all_dicts = []
+        for file in all_files:
+            if file.split('.')[-1] in self._exts:
+                all_dicts.append(self.loadFile(file, d))
+        
+        return all_dicts
 
-    def writeFile(self, filename, dir=None) -> None:
+    def writeFile(self, filename:str, dir:str=None) -> None:
         # TODO --
         pass
 

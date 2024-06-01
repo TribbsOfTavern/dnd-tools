@@ -17,15 +17,14 @@ class FileHandler:
     Each instance of the application should only need a single instance of the 
     FileHandler class to operate.
     """
-    def __init__(self, current_dir:str=".\\",
-        exts:list=['yaml']):
+    def __init__(self, current_dir:str=".\\"):
         """
         Initialize the FileHandler, given a starting directory, and optionally
         available file extentions.
-        :param current_dir: str. Directory 
+        :param current_dir: str. default directory to look for files.
         """
         self._working_dir = current_dir
-        self._exts = exts
+        self._exts = ['yaml', 'json', 'txt']
 
     @property
     def dir(self):
@@ -44,8 +43,13 @@ class FileHandler:
             main_logger.error(f"{filename} could not be loaded.")
             return {}
 
-        with open(path, "r") as fobj:
-            data = fobj.read('')
+        ext = filename.split('.')[-1]
+        if ext == 'yaml':
+            in_data = self._readYamlToDict()
+        if ext == 'json':
+            in_data = self._readJsonToDict()
+        if ext == 'txt':
+            in_data = self._readTextToDict()
 
     def loadFiles(self, dir="") -> list:
         d = self._working_dir if not dir else dir
@@ -90,11 +94,61 @@ class FileHandler:
             return False
         return True
 
-    def _readYamlToDict(self, path) -> dict:
-        pass
+    def _readYamlToDict(self, path:str) -> dict:
+        """
+        Read a YAML file from a given filepath and return its contents as a
+        dictionary.
+        :param path: str. Path to the YAML file.
+        :return: dict. Dictionary representing the contents of the YAML file.
+        """
+        try:
+            with open(path, 'r') as file:
+                return yaml.safe_load(file)
+        except FileNotFoundError:
+            fhandler_logger.error(f"The {path} does not exists.")
+            return {}
+        except yaml.YAMLError as e:
+            fhandler_logger.error(f"Error parsing YAML file {path}: {e}")
+            return {}
 
     def _readJsonToDict(self, path) -> dict:
-        pass
+        """
+        Read a JSON file from a given filepath and return its contents as a 
+        dictionary.
+        :param path: str. Path to the JSON file.
+        :return: dict. Dictionary representing the contents of the JSON file.
+        """
+        try:
+            with open(path, 'r') as file:
+                return json.load(file)
+        except FileNotFoundError:
+            fhandler_logger.error(f"The file {path} does not exist.")
+            return {}
+        except json.JSONDecodeError:
+            fhandler_logger.error(f"Error deconding JSON from file {path}")
+            return {}
 
     def _readTextToDict(self, path) -> dict:
-        pass
+        """
+        Read a plain text file from a given filepath and return its contents as
+        a dictionary.
+        :param path: str. Path to the TXT file.
+        return: dict. Dictionary representing the contents of the TXT file.
+        """
+        try:
+            with open(path, 'r') as file:
+                lines = file.readlines()
+                data_dict = {}
+                for lin in lines:
+                    key, value = line.split(':')
+                    key = key.strip()
+                    value = value.strip()
+                    data_dict[key] = value
+                return data_dict
+        except FileNotFoundError:
+            fhandler_logger.error(f"The file {path} does not exist.")
+            return {}
+        except Exception as e:
+            fhandler_logger.error(f"An error occurred while reading the file "
+            + f"{path}.")
+            return {}

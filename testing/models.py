@@ -310,14 +310,3 @@ class Reslover:
         Update the table dictionary for the Resolver object.
         """
         if not tables == self._tables: self._tables = tables
-
-"""
-    Custom Errors Relating To Models objects
-"""
-class TableFormatError(Exception):
-    """Raised when the table format is invalid."""
-    pass
-
-class TableInlineLinkError(Exception):
-    """Raised when a table inline link format is invalid."""
-    pass 

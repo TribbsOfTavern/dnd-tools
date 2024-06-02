@@ -19,4 +19,4 @@ def setup_logger():
     fhandler_logger.setLevel(logging.DEBUG)
     fhandler_logger.addHandler(handler)
 
-    return main_logger, model_logger, fhandler_logger
+    return main_logger, models_logger, fhandler_logger

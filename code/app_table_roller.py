@@ -37,7 +37,7 @@ class TableRoller():
         self.root = tk.Tk()
         self.root.title("Tribbs' Table Roller")
         self.root.geometry("800x600")
-        self.root.iconbitmap("./assets/py-app-icon.ico")
+        self.root.iconbitmap("../assets/py-app-icon.ico")
 
         # Menu Bar
         self.menu_bar = tk.Menu()

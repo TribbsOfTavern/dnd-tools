@@ -18,7 +18,7 @@ class FileHandler:
     Each instance of the application should only need a single instance of the 
     FileHandler class to operate.
     """
-    def __init__(self, current_dir:str=".\\"):
+    def __init__(self, current_dir:str="./"):
         """
         Initialize the FileHandler, given a starting directory, and optionally
         available file extentions.
@@ -57,11 +57,11 @@ class FileHandler:
 
         ext = filename.split('.')[-1]
         if ext == 'yaml':
-            in_data = self._readYamlToDict()
+            in_data = self._readYamlToDict(path)
         if ext == 'json':
-            in_data = self._readJsonToDict()
+            in_data = self._readJsonToDict(path)
         if ext == 'txt':
-            in_data = self._readTextToDict()
+            in_data = self._readTextToDict(path)
 
         return in_data
 
@@ -147,9 +147,6 @@ class FileHandler:
         try:
             with open(path, 'r') as file:
                 return yaml.safe_load(file)
-        except FileNotFoundError:
-            fhandler_logger.error(f"The {path} does not exists.")
-            return {}
         except yaml.YAMLError as e:
             fhandler_logger.error(f"Error parsing YAML file {path}: {e}")
             return {}
@@ -164,9 +161,6 @@ class FileHandler:
         try:
             with open(path, 'r') as file:
                 return json.load(file)
-        except FileNotFoundError:
-            fhandler_logger.error(f"The file {path} does not exist.")
-            return {}
         except json.JSONDecodeError:
             fhandler_logger.error(f"Error deconding JSON from file {path}")
             return {}
@@ -182,15 +176,12 @@ class FileHandler:
             with open(path, 'r') as file:
                 lines = file.readlines()
                 data_dict = {}
-                for lin in lines:
+                for line in lines:
                     key, value = line.split(':')
                     key = key.strip()
                     value = value.strip()
                     data_dict[key] = value
                 return data_dict
-        except FileNotFoundError:
-            fhandler_logger.error(f"The file {path} does not exist.")
-            return {}
         except Exception as e:
             fhandler_logger.error(f"An error occurred while reading the file "
             + f"{path}.")

@@ -4,7 +4,7 @@ def setup_logger():
     # Main application logger
     main_logger = logging.getLogger("TableRollerApp.Main")
     main_logger.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(levelname)s: %(message)')
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s: %(message)s')
     handler = logging.StreamHandler()
     handler.setFormatter(formatter)
     main_logger.addHandler(handler)

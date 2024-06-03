@@ -264,7 +264,7 @@ class Link:
             return False
         return True
 
-class Reslover:
+class Resolver:
     """
     Resolver takes the loaded dict of tables and is used to resolve rolled
     results, including nested refereces. Generally only one instance of a

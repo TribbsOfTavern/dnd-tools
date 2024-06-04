@@ -1,5 +1,7 @@
+import sys
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import patch, MagicMock
+
 from models import Table, Result, Link, Resolver
 
 class TestTable(unittest.TestCase):

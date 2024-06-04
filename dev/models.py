@@ -2,10 +2,11 @@
     Object models to be used with Rabke Roller App.
     Hopefully Written in a way that can be expanded later.
 """
-import logger
 import dice_utils
+import logger
 
-main_logger, model_logger, fhandler_logger = logger.setup_logger()
+main_logger, models_logger, fhandler_logger = logger.setup_logger()
+
 
 class Table:
     """

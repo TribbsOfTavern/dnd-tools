@@ -5,12 +5,12 @@
     - write to existing file
     - write to new file
 """
-import logger
+from logger import setup_logger
 import yaml, json
 import glob
 import os
 
-main_logger, model_logger, fhandler_logger = logger.setup_logger()
+main_logger, models_logger, fhandler_logger = setup_logger()
 
 class FileHandler:
     """

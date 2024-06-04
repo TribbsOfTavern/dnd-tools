@@ -1,5 +1,9 @@
+## 6/4/2024
+- Fixed file structure, learned a lot of nitpicks about imports. Working as intended now.
+
 ## 6/3/2024
 - Restructured folders and files.
+- Restructure broke logger.py.
 
 ## 6/2/2024
 - logger.py: Fixed bug with logging format.

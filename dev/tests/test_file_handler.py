@@ -1,10 +1,12 @@
+import sys
 import unittest
 from unittest.mock import patch, MagicMock
+
 from file_handler import FileHandler
 
 class TestFileHandler(unittest.TestCase):
     @patch('file_handler.FileHandler._readYamlToDict')
-    @patch('file_handler.builtins.open', new_callable=unittest.mock.mock_open,
+    @patch('builtins.open', new_callable=unittest.mock.mock_open,
         read_data=
             """
             key: value

@@ -18,14 +18,14 @@ class FileHandler:
     Each instance of the application should only need a single instance of the 
     FileHandler class to operate.
     """
-    def __init__(self, current_dir:str="./"):
+    def __init__(self, current_dir:str="./", exts:list=["yaml", "json"]):
         """
         Initialize the FileHandler, given a starting directory, and optionally
         available file extentions.
         :param current_dir: str. default directory to look for files.
         """
         self._working_dir = current_dir
-        self._exts = ['yaml', 'json', 'txt']
+        self._exts = exts
 
         fhandler_logger.debug("FileHandler initialized.")
 
@@ -51,17 +51,15 @@ class FileHandler:
         path = os.path.join(d, filename)
 
         if (not self.verifyFileExists(filename, d) or
-        not self.verifyFileExists(filename, d)):
+        not self.verifyFileExtention(filename)):
             main_logger.error(f"{filename} could not be loaded.")
             return {}
 
+        in_data = None
         ext = filename.split('.')[-1]
-        if ext == 'yaml':
-            in_data = self._readYamlToDict(path)
-        if ext == 'json':
-            in_data = self._readJsonToDict(path)
-        if ext == 'txt':
-            in_data = self._readTextToDict(path)
+
+        if ext == 'yaml': in_data = self.readYamlToDict(path)
+        if ext == 'json': in_data = self.readJsonToDict(path)
 
         return in_data
 
@@ -79,11 +77,11 @@ class FileHandler:
             if file.split('.')[-1] in self._exts:
                 fhandler_logger.debug(f"Loaded {file}")
                 all_dicts.append(self.loadFile(file, d))
-        
+
         return all_dicts
 
-    def writeFile(self, output:dict, filename:str,
-        dir:str="", format: str = "yaml") -> None:
+    def writeFile(self, output:dict, filename:str, dir:str="",
+        format:str="yaml") -> None:
         """
         Given a dictionary, filename, and optionally a directory, save a the 
         dictionary to a file. This can overwrite existing files.
@@ -98,27 +96,29 @@ class FileHandler:
                     yaml.dump(output, file, default_flow_style=False)
                 elif format.lower() == 'json':
                     json.dump(output, file, indent=4)
-                elif format.lower() == 'txt':
-                    file.write(output)
                 else:
                     main_logger.error(f"{filename.split('.')[-1]} is an invalid"
-                    + f" file extention. Please use one of {''.join(self._exts, ',')}")
+                    + " file extention. Please use one of"
+                    + f" {''.join(self._exts, ',')}")
         except IOError as e:
             filehandler_logger.error(f"Failed to write to file {path}: {e}")
 
-    def verifyFileFormat(self, filename:str) -> bool:
+    def verifyFileExtention(self, filename:str) -> bool:
         """
         Verify that a given file is using a proper extention.
         :param filename: str. Filename to be tested.
         :return: bool.
         """
+        if not filename.split('.')[0]:
+            main_logger.error("File name cannot be empty.")
+            return False
         if not filename.split('.')[-1] in self._exts:
             main_logger.error(f"File extention {filename.split('.')[-1]} not" 
                 + " compatible with application.")
             return False
         return True
 
-    def verifyFileExists(self, filename:str, dir:str) -> bool:
+    def verifyFileExists(self, filename:str, dir:str="") -> bool:
         """
         Verify that the given file exists in the given directory
         This also call a check to verify the file format. If the format is
@@ -127,17 +127,18 @@ class FileHandler:
         :param dir: str. Path to check for the file.
         :return: bool.
         """
-        if not self.verifyFileFormat(filename):
+        check_dir = dir if dir != None else self._working_dir
+        if not self.verifyFileExtention(filename):
             main_logger.error(f"File path can not be verified because"
                 + f" {filename} does not exist.")
             return False
-        path = os.path.join(dir, filename)
+        path = os.path.join(check_dir, filename)
         if not os.path.exists(path):
             main_logger.error(f"Path '{path}' is not valid.")
             return False
         return True
 
-    def _readYamlToDict(self, path:str) -> dict:
+    def readYamlToDict(self, path:str) -> dict:
         """
         Read a YAML file from a given filepath and return its contents as a
         dictionary.
@@ -151,7 +152,7 @@ class FileHandler:
             fhandler_logger.error(f"Error parsing YAML file {path}: {e}")
             return {}
 
-    def _readJsonToDict(self, path) -> dict:
+    def readJsonToDict(self, path) -> dict:
         """
         Read a JSON file from a given filepath and return its contents as a 
         dictionary.
@@ -160,29 +161,7 @@ class FileHandler:
         """
         try:
             with open(path, 'r') as file:
-                return json.load(file)
+                return json.loads(file)
         except json.JSONDecodeError:
             fhandler_logger.error(f"Error deconding JSON from file {path}")
-            return {}
-
-    def _readTextToDict(self, path) -> dict:
-        """
-        Read a plain text file from a given filepath and return its contents as
-        a dictionary.
-        :param path: str. Path to the TXT file.
-        return: dict. Dictionary representing the contents of the TXT file.
-        """
-        try:
-            with open(path, 'r') as file:
-                lines = file.readlines()
-                data_dict = {}
-                for line in lines:
-                    key, value = line.split(':')
-                    key = key.strip()
-                    value = value.strip()
-                    data_dict[key] = value
-                return data_dict
-        except Exception as e:
-            fhandler_logger.error(f"An error occurred while reading the file "
-            + f"{path}.")
             return {}

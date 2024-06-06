@@ -1,3 +1,7 @@
+## 6/5/2024
+- file_handler.py: Removed readFileFromText as it too easily allows format breaks. Will be added back at a later date.
+- file_handler.py: FileHandler.verifyFileFormat renamed to verifyFileExtention
+
 ## 6/4/2024
 - Fixed file structure, learned a lot of nitpicks about imports. Working as intended now.
 

@@ -1,7 +1,4 @@
-import sys
-import io
-import yaml
-import json
+import sys, io, yaml, json
 import unittest
 from unittest.mock import patch, MagicMock
 

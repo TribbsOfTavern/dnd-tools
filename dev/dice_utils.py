@@ -5,7 +5,7 @@
 '''
 import re
 import logger
-from random import randint
+from random import randint, seed
 from typing import List, Dict, Union, Optional
 
 main_logger, models_logger, fhandler_logger = logger.setup_logger()
@@ -16,6 +16,8 @@ re_notation = re.compile("(\d+)d(\d+)($|(\D+)(\d+))($|(\D+)(\d))",
 re_rolls = re.compile("(\d+)d(\d+)", re.IGNORECASE)
 re_keeps = re.compile("(kh|kl)(\d+)", re.IGNORECASE)
 re_mods = re.compile("(\+|\-|\*|\/)(\d+)", re.IGNORECASE)
+
+seed()
 
 class Die():
     ''' The just a bit overengineered die class 
@@ -36,6 +38,10 @@ class Die():
 
     @staticmethod
     def create(min:int=1, max:int=6):
+        '''
+        create method to correctly validate Die class initialization.
+        :return: Die. If initialized. None. If failed to initialize.
+        '''
         if not isinstance(min, int) or not isinstance(max, int):
             main_logger.error(f"Min and Max expected type int. "
                 + f"Given type {type(min)} for min."
@@ -62,12 +68,18 @@ class Die():
         return r_str
 
     def roll(self) -> int:
-        ''' Roll the die and set current face value '''
+        '''
+        Roll the die and set current face value, returns current face. 
+        :return: int. current value of die after roll
+        '''
         self.current_val = randint(self.min, self.max)
         return self.current_val
 
     def getCurrent(self) -> int:
-        ''' Get the current face of the die '''
+        '''
+        Get the current face of the die.
+        :return: int. Current value of die.
+        '''
         return self.current_val
 
 def parse_rolls(rollnote:str) -> Optional[Dict]:

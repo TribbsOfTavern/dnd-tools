@@ -1,6 +1,14 @@
+## 6/8/2024
+- dice_utils.py: Added more error handling.
+
+## 6/6/2024
+ - dice_utils.py added to /dev/
+ - tests/test_dice_utils.py added
+
 ## 6/5/2024
 - file_handler.py: Removed readFileFromText as it too easily allows format breaks. Will be added back at a later date.
 - file_handler.py: FileHandler.verifyFileFormat renamed to verifyFileExtention
+- tests/test_file_handler.py: Unit tests for file_handler.py added 
 
 ## 6/4/2024
 - Fixed file structure, learned a lot of nitpicks about imports. Working as intended now.
@@ -38,3 +46,4 @@ New change log added.
 - Removed TableRoller.addResults, TableRoller.logResults
 - Added TableRoller.addResultToLog
 - Changed TableRoller.rollOnTable to roll the correct number of times, and add each result with TableRoller.addResultToLog
+ 

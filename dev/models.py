@@ -7,49 +7,43 @@ import logger
 
 main_logger, models_logger, fhandler_logger = logger.setup_logger()
 
-
 class Table:
     """
     Table instance to handle with all data partaining to tables. A loaded table
     must be loaded from a properly formatted yaml file.
     """
-    def __init__(self, filename:str, loaded:dict) -> None:
+    def __init__(self) -> None:
         """
         Initialize A Table class containing the name, roll, results, and group
             that belong to the table.
+        The Table.create method should be used to validate and initialize.
+        """
 
-        :param filename: A String of the filename that the table was loaded from
-            this is used for the table group name.
+    @staticmethod
+    def create(loaded:dict, filename:str=""):
+        """
+        Create and validate a table object.
         :param loaded: A dictionary containing the table information that should
             have specific information formatted for 'Table Roller' application
+        :param filename: A String of the filename that the table was loaded from
+            this is used for the table group name.
         """
-        if not self._validate(loaded):
-            #!!REMOVE raise TableFormateError("Table format is missing required keys.")
-            # kill the initialize if not valid format.
-            return
 
-        self._filename = filename
-        self._name = loaded['table-name']
-        self._roll = loaded['roll']
-        self._group = loaded['group'] if 'group' in loaded else ""
-        self._results = loaded['result']
+        table = Table()
 
-    def __str__(self):
-        """
-        Return all information about the table if called as a string.
-        This is a formatted output instead of a long string of gabled text
-        making it easier to read the output.
-        :return: str. Formatted text containing all information about the table.
-        """
-        msg = f"Table: {self.name()}:^20\n"
-        msg += f"filename: {self.filename()}\n"
-        msg += f"roll: {self.roll()}\n"
-        msg += f"group: {self.group()}\n"
-        msg += f"result length: {self.length()}\n"
-        msg += f"results :\n"
-        for roll, res in self.results():
-            msg += f"\t{roll}: {self. res.raw()}"
-        return msg
+        if not table.validateTable(loaded):
+            return None
+
+        table._filename = filename
+        table._name = loaded['table-name']
+        table._roll = loaded['roll']
+        table._group = loaded['group'] if 'group' in loaded else ""
+        table._results = {}
+
+        for roll, res in loaded['results'].items():
+            table._results[roll] = Result.create(res)
+
+        return table
 
     @property
     def filename(self) -> str:
@@ -110,11 +104,11 @@ class Table:
         :return: str. Raw string of the result, if valid, empty string if not
             valid.
         """
-        if not _resultExists(value):
-            main_logging.error(f"Result Error: {value} not found within "+
-                + f"results for table {self.name()}.")
-            return ""
-        return self.results[value].raw()
+        if not self.resultExists(value):
+            main_logger.error(f"Result Error: '{value}' not found within "
+                + f"results for table {self.name}.")
+            return None
+        return self.results[value].text
 
     def getResult(self, value:int) -> str:
         """ 
@@ -123,32 +117,49 @@ class Table:
             dictionary.
         :return: The result in coresponding to the value given.
         """
-        if not _resultExists(value):
-            return ""
-        return self.results[value].get()
+        if not self.resultExists(value):
+            return None
+        return self.results[value]
 
-    def _resultExists(self, value:int) -> bool:
+    def resultExists(self, value:int) -> bool:
         """
         Check if a result is within the table.\
         :param value: int. Value of a roll on a table to be check if exists.
         :return: bool.  
         """
-        if value not in self.results():
+        if value not in self.results:
             main_logger.error(f"Key {value} not found in table {self.name}"
                 + " results.")
             return False
         return True
 
-    def _validateTable(self, loaded:dict) -> bool:
+    def validateTable(self, loaded:dict) -> bool:
         """
         Given the loaded dictionary with the expected table format, check if it
             is actually a valid table.
         """
         required_keys = ['table-name', 'roll', 'results']
-        if not all(required_keys in loaded):
-            main_logger.error("Table format missing one or more required" +
-                f" keys {required_keys}")
+        
+        # Check to make sure all required keys are in loaded dictionary.
+        for key in required_keys:
+            if not key in loaded:
+                main_logger.error(f"Table format missing required key {key}.")
+                return False
+
+        if not isinstance(loaded['table-name'], str):
             return False
+        if not isinstance(loaded['roll'], str):
+            return False
+        if not isinstance(loaded['results'], dict):
+            return False
+        
+        # Check that roll is a valid roll or set to 'length'        
+        if (not dice_utils.is_valid(loaded['roll']) and 
+        not loaded['roll'] == 'length'):
+            main_logger.error(f"Table key 'roll' must be a valid roll or"
+            + f"'length'. Instead recieved {loaded['roll']}")
+            return False 
+
         return True
 
 class Result:
@@ -157,91 +168,120 @@ class Result:
     references on other tables, and in-line rolls. This information is stored in
     created Link objects.
     """
-    def __init__(self, raw:str):
+    def __init__(self):
         """
-        Initialize a result object that contains a key and 
-        :param raw: String. containing the raw string of the result.
+        Initialize a result object that contains a raw string, and any links.
+        Use static method Result.create() to create a Result object.
         """
-        self._raw = raw
-        self._links = self._parseLinks(raw)
 
-    def __str__(self):
-        """
-        Get a long formatted string containing all the information about the
-            Result object. Formatted to readability.
-        :return: str. A formated string containing all information about Result.
-        """
-        msg = f"Raw: {self.raw}\n"
-        if not self._links:
-            msg += "Links: None\n"
-        else:
-            for l_text, l_type in self._links:
-                msg += f"{l_text}: {l_type}\n"
-        return msg
+    @staticmethod
+    def  create(text:str):
+        if not isinstance(text, str):
+            main_logger.error("Result object expected string, recieved"
+            + f" {text}.")
+            return None
 
-    def _parseLinks(self, raw:str) -> dict:
+        result = Result()
+        result._text = text
+        result._links = result.parseLinks(text)
+        return result
+
+    def parseLinks(self, text:str) -> dict:
         """
         Parse the raw sting for links and return a dictionary of them.
         dictionary key, value returns on {raw link: Link object}
         :return: dict. a dictionary of links within the raw string.
         """
+
+        if not '[' in text or not ']' in text:
+            return None
+
         links = {}
         search = []
         brackets = []
         if '[' in text and ']' in text:
-            brackets = [i for i, ch in enumerate(raw) if ch == '[' or ch == ']']
+            brackets = [i for i, ch in enumerate(text) 
+            if ch == '[' or ch == ']']
         if brackets:
             for i in range(0, len(brackets), 2):
                 try:
-                    search.append(text[brackets[i]+1:[i+1]])
+                    search.append(text[brackets[i]+1:brackets[i+1]])
                 except:
                     pass
         for found in search:
-            links[text] = Link(found)
+            links[found] = Link.create(found)
+        
+        return links if links else None
 
     @property
-    def raw(self):
+    def text(self):
         """
         Return the raw string.
         :return: String containing the raw result string.
         """
-        return self.raw
+        return self._text
 
-    @raw.setter
-    def raw(self, x:str) -> None:
+    @property
+    def links(self):
         """
-        Set the raw result string of the Result object.
+        Return the links within the Result object.
+        :return: dict. A Dictionary containing all links, empty dict '{}' if
+        none.
+        """
+        return self._links
+
+    @text.setter
+    def text(self, text:str) -> None:
+        """
+        Set the raw result string of the Result object. Setting the text will
+        also set links within the text.
         :param str: The raw string for the int result of the table.
         """
-        self._raw = x
+        if not isinstance(text, str):
+            self._text = ""
+            return
 
-    def get() -> str:
+        self._text = text
+
+        self._links = self.parseLinks(self._text)
+
+    def toDict(self) -> dict:
         """
-        Return a resolved result string.
-        :return: str. A String that has been resolved, including linked table
-        rolls and summed dice rolls.
+        Return the object variables as a dict.
+        :return: dict. {"raw": x:str, "links": y:list[Link]}
         """
-        # TODO: THIS
-        pass
+        return {"text": self._text, "links": self._links}
 
 class Link:
     """
     Link object contains all information of a single stand alone roll or roll
     on another table reference. A link has a type of either 'roll' or 'table'.
     There will not be a reference to a Link of link_type 'roll'.
+    A Link object should be initialized using the 'create' static method.
     """
-    def __init__(self, text:str):
+    @staticmethod
+    def create(text: str):
+        """
+        Create a Link object given a string.
+        :param link_text: String. The original text of the inline link as str.
+        :return: Obj. If Link is valid, return the link obj. If link is not
+        valid, return None.
+        """
+        if not Link._valid(text):
+            return None
+        
+        link = Link()
+        link._text = text
+        link._type = 'table' if '@' in text else 'roll'
+        link._roll = text if link._type == 'roll' else text.split('@')[0]
+        link._table = '' if link._type == 'roll' else text.split('@')[1]
+        return link
+
+    def __init__(self):
         """
         Initialize a TableLink class that hold information about inline links
         :param link_text: String. The original text of the inline link as str.
         """
-        if not self._valid(text):
-            return
-
-        self._text = text
-        self._type = 'table' if '@' in text else 'roll'
-        self._roll = text if self._type == 'roll' else text.split('@')[0]
-        self._table = "" if self._type == 'roll' else text.split('@')[1]
 
     @property
     def text(self) -> str:
@@ -259,10 +299,35 @@ class Link:
     def table(self) -> str:
         return self._table
 
-    def _valid(self, x:str):
-        if not '@' in x or not dice_utils.is_valid(x):
-            main_logger.error(f"{x} is not a valid link format.")
+    def getDict(self) -> dict:
+        """
+        :return: dict. Returns all information within the object as a dict.
+        """
+        return {
+            'text': self._text,
+            'type': self._type,
+            'roll': self._roll,
+            'table': self._table
+        }
+
+    def _valid(text:str):
+        """
+        Validate the string is formated correctly for Link use.
+        """
+        # Invaalid type
+        if not isinstance(text, str):
+            main_logger.error(f'Expected string, recieved {type(type)}')
             return False
+        # invalid dice roll with no table
+        if not "@" in text and not dice_utils.is_valid(text):
+            main_logger.error(f'{text} is invalid link.')
+            return False
+        if '@' in text and (not dice_utils.is_valid(text.split('@')[0]) and
+        not text.split('@')[0].isdigit()):
+            main_logger.error(f'1. Roll on table is not a valid roll notation'
+            + ' or digit.')
+            return False
+            
         return True
 
 class Resolver:
@@ -278,33 +343,48 @@ class Resolver:
         """
         self._tables = tables
 
-    def get(self, result: Result) -> str:
+    def get(self, result:Result, depth:int=0) -> str:
         """
-        Resolve a Result object, including any nested references.
-        :param result: The Results object to resolve.
-        :return: The resolved result string.
+        Given a Result object, clean it, and return results including results
+        rolled on another table.
         """
-        if not results.links:
-            return result.raw()
-        
-        resolved_link = []
-        for link in results.links:
-            if link.link_type == 'roll':
-                # TODO --  Return the raw and result of the roll as dict
-                if link.text.is_digit():
-                    # Amount of rolls
-                    pass
-                else:
-                    # Roll notation to determin
-                    pass
-            elif link.link_type == 'table':
-                # TODO -- Check this code to make sure it works fine.
-                # Currently doesnt account for multiple rolls on a table.
-                referenced_table = self.tables[link.table]
-                referenced_roll = link.roll # roll needs to be summed by dice utils
-                referenced_result = referenced_table.getResult(referenced_roll)
-                resolved_link = self.get(referenced_result)
-                resolved_links.append(resolved_link)
+        dep = depth
+        if not result.links:
+            return result.text
+        else:
+            temp_text = result.text
+            print(f"{temp_text}")
+            for l, link in result.links.items():
+                if link.link_type == "roll":
+                    r = dice_utils.sum_roll(link.roll)
+                    print(f"{r} -> {link.text}")
+                    temp_text = temp_text.replace(link.text, str(r), 1)                    
+                elif link.link_type == 'table':
+                    temp_result = []
+                    amount = 0
+                    
+                    amount = link.roll
+                    if dice_utils.is_valid(link.roll):
+                        amount = dice_utils.sum_roll(link.roll)
+
+                    temp_text = temp_text.replace(link.text,
+                    f"{amount} on {link.table}", 1)
+
+                    for _ in range(int(amount)):
+                        table_roll = dice_utils.sum_roll(
+                            self._tables[link.table].roll)
+                        temp_res = self._tables[link.table].getResult(
+                            table_roll)
+                        temp_result.append(temp_res)
+                    
+                    spacer = "  "
+                    for inline in temp_result:
+                        inline_result = self._tables[link.table].getResult(
+                        dice_utils.sum_roll(self._tables[link.table].roll))
+                        temp_text += "\n\t"
+                        temp_text += self.get(inline_result, depth=dep+1)
+            
+            return temp_text                        
 
     def update(self, tables:dict):
         """

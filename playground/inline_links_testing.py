@@ -115,18 +115,3 @@ def tableValidation() -> bool:
                     return False
                       
 
-if __name__ == "__main__":
-    loadTablesFromYaml()
-    
-    tableValidation()
-
-    '''
-    #Test Example
-    test_table = "Test Table A"
-    test = 8
-    
-    x = retrieveResult(tables_dict[test_table], test)
-    msg = ' Test ' + str(test)
-    print(f"{msg:_^60}")
-    print(x , "\n")
-    '''

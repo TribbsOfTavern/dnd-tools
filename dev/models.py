@@ -7,6 +7,174 @@ import logger
 
 main_logger, models_logger, fhandler_logger = logger.setup_logger()
 
+class Link:
+    """
+    Link object contains all information of a single stand alone roll or roll
+    on another table reference. A link has a type of either 'roll' or 'table'.
+    There will not be a reference to a Link of link_type 'roll'.
+    A Link object should be initialized using the 'create' static method.
+    """
+    @staticmethod
+    def create(text: str):
+        """
+        Create a Link object given a string.
+        :param link_text: String. The original text of the inline link as str.
+        :return: Obj. If Link is valid, return the link obj. If link is not
+        valid, return None.
+        """
+        if not Link._valid(text):
+            return None
+        
+        link = Link()
+        link._text = text
+        link._type = 'table' if '@' in text else 'roll'
+        link._roll = text if link._type == 'roll' else text.split('@')[0]
+        link._table = '' if link._type == 'roll' else text.split('@')[1]
+        return link
+
+    def __init__(self):
+        """
+        Initialize a TableLink class that hold information about inline links
+        :param link_text: String. The original text of the inline link as str.
+        """
+
+    @property
+    def text(self) -> str:
+        return self._text
+
+    @property
+    def link_type(self) -> str:
+        return self._type
+
+    @property
+    def roll(self) -> str:
+        return self._roll
+
+    @property
+    def table(self) -> str:
+        return self._table
+
+    def getDict(self) -> dict:
+        """
+        :return: dict. Returns all information within the object as a dict.
+        """
+        return {
+            'text': self._text,
+            'type': self._type,
+            'roll': self._roll,
+            'table': self._table
+        }
+
+    def _valid(text:str):
+        """
+        Validate the string is formated correctly for Link use.
+        """
+        # Invaalid type
+        if not isinstance(text, str):
+            main_logger.error(f'Expected string, recieved {type(type)}')
+            return False
+        # invalid dice roll with no table
+        if not "@" in text and not dice_utils.is_valid(text):
+            main_logger.error(f'{text} is invalid link.')
+            return False
+        if '@' in text and (not dice_utils.is_valid(text.split('@')[0]) and
+        not text.split('@')[0].isdigit()):
+            main_logger.error(f'1. Roll on table is not a valid roll notation'
+            + ' or digit.')
+            return False
+            
+        return True
+
+class Result:
+    """
+    Result object handles all data regarding a result including linked
+    references on other tables, and in-line rolls. This information is stored in
+    created Link objects.
+    """
+    def __init__(self):
+        """
+        Initialize a result object that contains a raw string, and any links.
+        Use static method Result.create() to create a Result object.
+        """
+
+    @staticmethod
+    def  create(text:str):
+        if not isinstance(text, str):
+            main_logger.error("Result object expected string, recieved"
+            + f" {text}.")
+            return None
+
+        result = Result()
+        result._text = text
+        result._links = result.parseLinks(text)
+        return result
+
+    def parseLinks(self, text:str) -> dict:
+        """
+        Parse the raw sting for links and return a dictionary of them.
+        dictionary key, value returns on {raw link: Link object}
+        :return: dict. a dictionary of links within the raw string.
+        """
+
+        if not '[' in text or not ']' in text:
+            return None
+
+        links = {}
+        search = []
+        brackets = []
+        if '[' in text and ']' in text:
+            brackets = [i for i, ch in enumerate(text) 
+            if ch == '[' or ch == ']']
+        if brackets:
+            for i in range(0, len(brackets), 2):
+                try:
+                    search.append(text[brackets[i]+1:brackets[i+1]])
+                except:
+                    pass
+        for found in search:
+            links[found] = Link.create(found)
+        
+        return links if links else None
+
+    @property
+    def text(self):
+        """
+        Return the raw string.
+        :return: String containing the raw result string.
+        """
+        return self._text
+
+    @property
+    def links(self):
+        """
+        Return the links within the Result object.
+        :return: dict. A Dictionary containing all links, empty dict '{}' if
+        none.
+        """
+        return self._links
+
+    @text.setter
+    def text(self, text:str) -> None:
+        """
+        Set the raw result string of the Result object. Setting the text will
+        also set links within the text.
+        :param str: The raw string for the int result of the table.
+        """
+        if not isinstance(text, str):
+            self._text = ""
+            return
+
+        self._text = text
+
+        self._links = self.parseLinks(self._text)
+
+    def toDict(self) -> dict:
+        """
+        Return the object variables as a dict.
+        :return: dict. {"raw": x:str, "links": y:list[Link]}
+        """
+        return {"text": self._text, "links": self._links}
+
 class Table:
     """
     Table instance to handle with all data partaining to tables. A loaded table
@@ -110,12 +278,12 @@ class Table:
             return None
         return self.results[value].text
 
-    def getResult(self, value:int) -> str:
+    def getResult(self, value:int) -> Result:
         """ 
         Given an integer, return the given result from the results dictionary.
         :param x: Integer key to the result (value) to be found in the 
             dictionary.
-        :return: The result in coresponding to the value given.
+        :return: The Result object in coresponding to the value given.
         """
         if not self.resultExists(value):
             return None
@@ -162,181 +330,13 @@ class Table:
 
         return True
 
-class Result:
-    """
-    Result object handles all data regarding a result including linked
-    references on other tables, and in-line rolls. This information is stored in
-    created Link objects.
-    """
-    def __init__(self):
-        """
-        Initialize a result object that contains a raw string, and any links.
-        Use static method Result.create() to create a Result object.
-        """
-
-    @staticmethod
-    def  create(text:str):
-        if not isinstance(text, str):
-            main_logger.error("Result object expected string, recieved"
-            + f" {text}.")
-            return None
-
-        result = Result()
-        result._text = text
-        result._links = result.parseLinks(text)
-        return result
-
-    def parseLinks(self, text:str) -> dict:
-        """
-        Parse the raw sting for links and return a dictionary of them.
-        dictionary key, value returns on {raw link: Link object}
-        :return: dict. a dictionary of links within the raw string.
-        """
-
-        if not '[' in text or not ']' in text:
-            return None
-
-        links = {}
-        search = []
-        brackets = []
-        if '[' in text and ']' in text:
-            brackets = [i for i, ch in enumerate(text) 
-            if ch == '[' or ch == ']']
-        if brackets:
-            for i in range(0, len(brackets), 2):
-                try:
-                    search.append(text[brackets[i]+1:brackets[i+1]])
-                except:
-                    pass
-        for found in search:
-            links[found] = Link.create(found)
-        
-        return links if links else None
-
-    @property
-    def text(self):
-        """
-        Return the raw string.
-        :return: String containing the raw result string.
-        """
-        return self._text
-
-    @property
-    def links(self):
-        """
-        Return the links within the Result object.
-        :return: dict. A Dictionary containing all links, empty dict '{}' if
-        none.
-        """
-        return self._links
-
-    @text.setter
-    def text(self, text:str) -> None:
-        """
-        Set the raw result string of the Result object. Setting the text will
-        also set links within the text.
-        :param str: The raw string for the int result of the table.
-        """
-        if not isinstance(text, str):
-            self._text = ""
-            return
-
-        self._text = text
-
-        self._links = self.parseLinks(self._text)
-
-    def toDict(self) -> dict:
-        """
-        Return the object variables as a dict.
-        :return: dict. {"raw": x:str, "links": y:list[Link]}
-        """
-        return {"text": self._text, "links": self._links}
-
-class Link:
-    """
-    Link object contains all information of a single stand alone roll or roll
-    on another table reference. A link has a type of either 'roll' or 'table'.
-    There will not be a reference to a Link of link_type 'roll'.
-    A Link object should be initialized using the 'create' static method.
-    """
-    @staticmethod
-    def create(text: str):
-        """
-        Create a Link object given a string.
-        :param link_text: String. The original text of the inline link as str.
-        :return: Obj. If Link is valid, return the link obj. If link is not
-        valid, return None.
-        """
-        if not Link._valid(text):
-            return None
-        
-        link = Link()
-        link._text = text
-        link._type = 'table' if '@' in text else 'roll'
-        link._roll = text if link._type == 'roll' else text.split('@')[0]
-        link._table = '' if link._type == 'roll' else text.split('@')[1]
-        return link
-
-    def __init__(self):
-        """
-        Initialize a TableLink class that hold information about inline links
-        :param link_text: String. The original text of the inline link as str.
-        """
-
-    @property
-    def text(self) -> str:
-        return self._text
-
-    @property
-    def link_type(self) -> str:
-        return self._type
-
-    @property
-    def roll(self) -> str:
-        return self._roll
-
-    @property
-    def table(self) -> str:
-        return self._table
-
-    def getDict(self) -> dict:
-        """
-        :return: dict. Returns all information within the object as a dict.
-        """
-        return {
-            'text': self._text,
-            'type': self._type,
-            'roll': self._roll,
-            'table': self._table
-        }
-
-    def _valid(text:str):
-        """
-        Validate the string is formated correctly for Link use.
-        """
-        # Invaalid type
-        if not isinstance(text, str):
-            main_logger.error(f'Expected string, recieved {type(type)}')
-            return False
-        # invalid dice roll with no table
-        if not "@" in text and not dice_utils.is_valid(text):
-            main_logger.error(f'{text} is invalid link.')
-            return False
-        if '@' in text and (not dice_utils.is_valid(text.split('@')[0]) and
-        not text.split('@')[0].isdigit()):
-            main_logger.error(f'1. Roll on table is not a valid roll notation'
-            + ' or digit.')
-            return False
-            
-        return True
-
 class Resolver:
     """
     Resolver takes the loaded dict of tables and is used to resolve rolled
     results, including nested refereces. Generally only one instance of a
     resolver should be needed for an app.
     """
-    def __init__(self, tables: dict):
+    def __init__(self, tables:dict={}):
         """
         Initializing the resolver with a mapping of table names to Table
         instances.
@@ -391,3 +391,10 @@ class Resolver:
         Update the table dictionary for the Resolver object.
         """
         if not tables == self._tables: self._tables = tables
+
+    @property
+    def tables(self):
+        """
+        Retrieve tables currently loaded within the Resolver object.
+        """
+        return self._tables

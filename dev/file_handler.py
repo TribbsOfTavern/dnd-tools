@@ -138,7 +138,7 @@ class FileHandler:
             return False
         return True
 
-    def readYamlToDict(self, path:str) -> dict:
+    def readYamlToDict(self, path:str) -> list:
         """
         Read a YAML file from a given filepath and return its contents as a
         dictionary.
@@ -147,7 +147,12 @@ class FileHandler:
         """
         try:
             with open(path, 'r') as file:
-                return yaml.safe_load(file)
+                loader = yaml.FullLoader
+                data = list(yaml.load_all(file, Loader=loader))
+                loaded_dict = {}
+                for each in data:
+                    loaded_dict[each['table-name']] = each
+                return loaded_dict
         except yaml.YAMLError as e:
             fhandler_logger.error(f"Error parsing YAML file {path}: {e}")
             return {}

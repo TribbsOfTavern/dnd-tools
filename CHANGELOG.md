@@ -1,3 +1,25 @@
+## 7/1/2024
+app.py: added loadFiles() for loading entire directories of table files.
+
+## 6/26/2024
+- app.py initiates correct GUI components
+- app.py: added func checkForProblems which checks all loaded tables for problems and output that info into Error Logs tab textbox.
+- added extention .yml handling for YAML files.
+- added Tools menu
+- added function to clear Error Logs Tab
+- added function to clear Roll Logs Tab
+
+## 6/20/2024
+- app.py created
+- app.py: added TableRollerApp class.
+- app.py: added class funcs, init, initWidgets, loadFromFile, TableConstruction, onTableSelection, onButtonRoll, updateTableList, updateResultLIst, updateTextRolls, updateTextLogs, doNothing, runApp, exitApp
+- app.py: Single files load successfully
+
+## 6/15/2024
+- models.py rewrite, error handling added, Resolver class fleshed out.
+- tests/test_models.py added and fleshed out.
+- [Note] Was unsure how to go about unit testing Resolver. It was tested in a throw away file.
+
 ## 6/8/2024
 - dice_utils.py: Added more error handling.
 
@@ -15,7 +37,7 @@
 
 ## 6/3/2024
 - Restructured folders and files.
-- Restructure broke logger.py.
+- Restructured broke logger.py.
 
 ## 6/2/2024
 - logger.py: Fixed bug with logging format.

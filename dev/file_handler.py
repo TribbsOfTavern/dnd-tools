@@ -18,7 +18,7 @@ class FileHandler:
     Each instance of the application should only need a single instance of the 
     FileHandler class to operate.
     """
-    def __init__(self, current_dir:str="./", exts:list=["yaml", "json"]):
+    def __init__(self, current_dir:str="./", exts:list=["yaml", "yml", "json"]):
         """
         Initialize the FileHandler, given a starting directory, and optionally
         available file extentions.
@@ -55,13 +55,15 @@ class FileHandler:
             main_logger.error(f"{filename} could not be loaded.")
             return {}
 
-        in_data = None
+        out_data = None
         ext = filename.split('.')[-1]
 
-        if ext == 'yaml': in_data = self.readYamlToDict(path)
-        if ext == 'json': in_data = self.readJsonToDict(path)
+        if ext == 'yaml' or ext == 'yml':
+            out_data = self.readYamlToDict(path)
+        if ext == 'json':
+            out_data = self.readJsonToDict(path)
 
-        return in_data
+        return out_data
 
     def loadFiles(self, dir="") -> list:
         """
@@ -71,12 +73,21 @@ class FileHandler:
         :return: list. List of dictionaries read in from files.
         """
         d = self._working_dir if not dir else dir
-        all_files = glob.glob(dir)
+        all_files = glob.glob(os.path.join(dir, '*.*'))
         all_dicts = []
         for file in all_files:
-            if file.split('.')[-1] in self._exts:
+            print(file)
+            if os.path.isfile(file) and file.split('.')[-1] in self._exts:
                 fhandler_logger.debug(f"Loaded {file}")
                 all_dicts.append(self.loadFile(file, d))
+
+                ext = file.split('.')[-1]
+                if ext == 'yaml' or ext == 'yml':
+                    all_dicts.append(self.readYamlToDict(file))
+                elif ext == 'json':
+                    out_data = self.readJsonToDict(path)
+                else:
+                    continue
 
         return all_dicts
 

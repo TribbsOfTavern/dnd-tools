@@ -8,13 +8,6 @@ import file_handler as fh
 import os
 import random
 
-##
-# TODO -- Need a more robust loading of tables. They need to be verified on load
-# this includes all result and link objects as well, which can only be done once
-# all the tables have loaded in as a dict. All these errors need to be logged in
-# the logs text and file so users(me) can quickly fix the issues on the fly.
-##
-
 class TableRollerApp():
     def __init__(self, debug:bool=False) -> None:
         random.seed()
@@ -43,17 +36,23 @@ class TableRollerApp():
         # MENUS
         self.menu_bar = tk.Menu()
         # File Menu Cascade
-
         self.menu_file = tk.Menu(self.menu_bar, tearoff=0)
         self.menu_file.add_command(label="Load from File",
             command=self.loadFromFile)
         self.menu_file.add_command(label="Load from Folder",
-            command=self.doNothing)
+            command=self.loadFromDir)
         self.menu_file.add_separator()
         self.menu_file.add_command(label="Exit", command=self.exitApp)
         self.menu_bar.add_cascade(label="File", menu=self.menu_file)
         # Attach menu bar
         self.root.configure(menu=self.menu_bar)
+        # Settings Menu Cascade
+        self.menu_tools = tk.Menu(self.menu_bar, tearoff=0)
+        self.menu_tools.add_command(label="Clear Rolls",
+            command=self.clearTextRolls)
+        self.menu_tools.add_command(label="Clear Errors",
+            command=self.clearTextLogs)
+        self.menu_bar.add_cascade(label="Tools", menu=self.menu_tools)
 
         # TABLE LIST
         self.list_tables = tk.Listbox(self.root)
@@ -105,13 +104,34 @@ class TableRollerApp():
         self.root.columnconfigure(1, weight=3)
         self.root.rowconfigure(0, weight=1)
 
-    def loadFromFile(self):
-        file = filedialog.askopenfile("r", title="Open From File...",
+    def loadFromFile(self) -> None:
+        file = filedialog.askopenfile("r", title="Choose File...",
             initialdir=self.file_handler.dir, filetypes=(
-            ("YAML", "*.yaml"), ("Text Files", "*.txt"), ("JSON", "*.json")))
+            ("YAML", "*.yaml *.yml"), ("Text Files", "*.txt"),
+            ("JSON", "*.json")))
         if file:
             loaded = self.file_handler.loadFile(file.name)
             self.resolver.update(self.tableConstruction(loaded))
+            self.checkForProblems()
+            self.updateTableList()
+
+    def loadFromDir(self) -> None:
+        dir = filedialog.askdirectory(title="Choose Folder...",
+            initialdir=self.file_handler.dir)
+        if dir:
+            blob = self.file_handler.loadFiles(dir)
+            loaded = self.file_handler.loadFiles(dir)
+            tables = {}
+            for dicts in loaded:
+                new_Tabels = self.tableConstruction(dicts)
+                for name, table in new_Tabels.items():
+                    if name not in tables:
+                        tables[name] = table
+                    else:
+                        self.updateTextLogs(
+                            f"TABLE {name} already in loaded tables."
+                        )
+            self.resolver.update(tables)
             self.checkForProblems()
             self.updateTableList()
 
@@ -196,6 +216,16 @@ class TableRollerApp():
         self.text_logs.insert("1.0", f"{utext}{text}")
         self.text_logs.config(state=tk.DISABLED)
 
+    def clearTextLogs(self) -> None:
+        self.text_logs.config(state=tk.NORMAL)
+        self.text_logs.delete("1.0", "end")
+        self.text_logs.config(state=tk.DISABLED)
+
+    def clearTextRolls(self) -> None:
+        self.text_rolls.config(state=tk.NORMAL)
+        self.text_rolls.delete("1.0", "end")
+        self.text_rolls.config(state=tk.DISABLED)
+
     def checkForProblems(self) -> None:
         """
         Called to check for and log any issues with tables. Output issues to Log
@@ -207,7 +237,7 @@ class TableRollerApp():
             if not tables[table]:
                 self.updateTextLogs(f">> Table '{table}' not loaded properly.")
                 continue
-            for i in range(1, tables[table].length):
+            for i in range(1, tables[table].length+1):
                 # Results range check
                 if i not in tables[table].results:
                     msg = f">> Roll {i} not found in {tables[table].name}"
@@ -224,9 +254,10 @@ class TableRollerApp():
                 if links:
                     for link in links:
                         if links[link]:
-                            if links[link].table and not links[link].table in tables.keys(): 
-                                msg = f">> Linked roll '{links[link].table}' not"
-                                msg += f" found in '{tables[table].name}'"
+                            if (links[link].table
+                            and not links[link].table in tables.keys()): 
+                                msg = f">> Linked roll '{links[link].table}'"
+                                msg += f" not found in '{tables[table].name}'"
                                 msg += f" result {i}."
                                 self.updateTextLogs(msg)
                                 continue

@@ -3,9 +3,12 @@
     Specifically for interpretting roll notations.
     I may have over engineered this a bit.
 '''
-from random import randint
 import re
+import logger
+from random import randint, seed
 from typing import List, Dict, Union, Optional
+
+main_logger, models_logger, fhandler_logger = logger.setup_logger()
 
 # Regularly used regex patterns
 re_notation = re.compile("(\d+)d(\d+)($|(\D+)(\d+))($|(\D+)(\d))",
@@ -14,24 +17,69 @@ re_rolls = re.compile("(\d+)d(\d+)", re.IGNORECASE)
 re_keeps = re.compile("(kh|kl)(\d+)", re.IGNORECASE)
 re_mods = re.compile("(\+|\-|\*|\/)(\d+)", re.IGNORECASE)
 
+seed()
+
 class Die():
     ''' The just a bit overengineered die class 
         default is your standard six-sided die.
     '''
-    def __init__(self, min:int=1, max:int=6) -> None:
+    def __init__(self) -> None:
         ''' Initialize the class, set the min and max rolls. 
             Current value defaults to lowest possible roll
-        '''
-        self.min = min
-        self.max = max
-        self.current_val = min
 
-    def roll(self) -> None:
-        ''' Roll the die and set current face value '''
+            :param min: int. min number on the sides of a die. Must be lower
+                than max. Default: 1
+            :param max: int. max number of the sides of a die. Must be higher 
+                than min. Default: 6
+        '''
+        self.min = 1
+        self.max = 6
+        self.current_val = 1
+
+    @staticmethod
+    def create(min:int=1, max:int=6):
+        '''
+        create method to correctly validate Die class initialization.
+        :return: Die. If initialized. None. If failed to initialize.
+        '''
+        if not isinstance(min, int) or not isinstance(max, int):
+            main_logger.error(f"Min and Max expected type int. "
+                + f"Given type {type(min)} for min."
+                + f" Given type {type(max)} for max.")
+            return None
+        if min >= max:
+            main_logger.error("Die class param error. min must be lower than"
+                + f" max. Given min {min} not less than given max {max}.")
+            return None
+        if max <= min:
+            main_logger.error("Die class param error. max must be higher than"
+                + f" min. Given max {max} not higher than given {min}.")
+            return None
+
+        created_die = Die()
+        created_die.min = min
+        created_die.max = max
+        created_die_current_val = min
+        return created_die
+
+    def __str__(self):
+        r_str = f"Die Objects: Min: {self.min} | Max: {self.max} |"
+        r_str += f" Current: {self.current_val}"
+        return r_str
+
+    def roll(self) -> int:
+        '''
+        Roll the die and set current face value, returns current face. 
+        :return: int. current value of die after roll
+        '''
         self.current_val = randint(self.min, self.max)
+        return self.current_val
 
     def getCurrent(self) -> int:
-        ''' Get the current face of the die '''
+        '''
+        Get the current face of the die.
+        :return: int. Current value of die.
+        '''
         return self.current_val
 
 def parse_rolls(rollnote:str) -> Optional[Dict]:
@@ -46,13 +94,25 @@ def parse_rolls(rollnote:str) -> Optional[Dict]:
     :return: a dictionary containing the list of rolls ('rolls') or None if no
         rolls are found in the roll notation.
     """
-    rolls = re_rolls.search(rollnote)
-    if rolls:
-        return {'rolls': 
-        [randint(1, 
-        int(rolls.groups()[1])) for _ in range(int(rolls.groups()[0]))]}
-    else:
+    if not isinstance(rollnote, str):
+        main_logger.error(f"Invalid type {type(rollnote)}. Expected type str.")
         return None
+    if not rollnote:
+        main_logger.error(f"Empty str. Expected str containing roll notation.")
+        return None
+    if not is_valid(rollnote):
+        main_logger.error(f"Invalid roll notation passed {rollnote}.")
+        return None
+
+    rolls = re_rolls.search(rollnote)
+    
+    if not is_valid(rollnote):
+        return None
+    if not rolls:
+        return None
+    
+    return {'rolls': [randint(1, 
+        int(rolls.groups()[1])) for _ in range(int(rolls.groups()[0]))]}
 
 def parse_keeps(rollnote:str, rolls:List[int]) -> Optional[Dict]:
     """
@@ -68,11 +128,29 @@ def parse_keeps(rollnote:str, rolls:List[int]) -> Optional[Dict]:
         keep ('value') if a keep flag is found or None if no modifier is present
         in the roll notation.
     """
-    keeps = re_keeps.search(rollnote)
-    if keeps and int(keeps.groups()[1]) <= len(rolls):
-        return {'keep': keeps.groups()[0], 'value': int(keeps.groups()[1])}
-    else:
+    if not all(isinstance(r, int) for r in rolls):
+        main_logger.error(f"Invalid type passed in rolls. Expected list of int"
+            + " types.")
         return None
+    if not isinstance(rollnote, str):
+        main_logger.error(f"Invalid type {type(rollnote)}. Expected type str.")
+        return None
+    if not rollnote:
+        main_logger.error(f"Empty str. Expected str containing roll notation.")
+        return None
+    if not is_valid(rollnote):
+        main_logger.error(f"Invalid roll notation passed {rollnote}.")
+        return None
+
+    keeps = re_keeps.search(rollnote)
+    if not keeps:
+        return {'keep': 'kh', 'value': len(rolls)}
+    if not (int(keeps.groups()[1]) <= len(rolls)):
+        main_logger.error(f"Length of found groups longer than length of" 
+            + " rolls.")
+        return None
+
+    return {'keep': keeps.groups()[0], 'value': int(keeps.groups()[1])}
 
 def parse_mods(rollnote:str) -> Optional[Dict]:
     """ 
@@ -80,18 +158,25 @@ def parse_mods(rollnote:str) -> Optional[Dict]:
     
     This function extracts the modifier operation and value from a roll notation
     string. The roll notation should follow the format: 
-    'rXdY[kh|klZ][+|-|*|/Z]'.
+    'rXdY[kh|klZ][+|-|*|/M]'.
 
     :param rollnote: The roll notation to evaluate
     :return: A dictionary containing the modifier operation ('op') and value
         ('value') if a modifier is found or None if no modifier is present in 
         the roll notation.
     """
-    mods = re_mods.search(rollnote)
-    if mods:
-        return {'op': mods.groups()[0], 'value': int(mods.groups()[1])}
-    else:
+    if not isinstance(rollnote, str):
+        main_logger.error(f"Invalid type {type(rollnote)}. Expected type str.")
         return None
+    if not is_valid(rollnote):
+        main_logger.error(f"Invalid roll notation passed {rollnote}.")
+        return None
+
+    mods = re_mods.search(rollnote)
+    if not mods:
+        return None
+
+    return {'op': mods.groups()[0], 'value': int(mods.groups()[1])}
 
 def sum_roll(rollnote:str, verbose:bool=False) -> Union[Dict, int]:
     """ 
@@ -108,6 +193,18 @@ def sum_roll(rollnote:str, verbose:bool=False) -> Union[Dict, int]:
     :param verbose: If True, return a dictionary with all results.
     :return: The result of the roll notation evalluation.
     """ 
+    if not isinstance(rollnote, str):
+        main_logger.error("Invalid type passed as roll notation:"
+            + f"{type(rollnote)}. Expected type str")
+        return None
+    if not isinstance(verbose, bool):
+        main_logger.error(f"Invalid type passed as verbose: {type(verbose)}."
+            + "Expected tyoe bool")
+        return None
+    if not is_valid(rollnote):
+        main_logger.error(f"Passed roll notation {rollnote} is not valid.")
+        return None
+
     rolls = parse_rolls(rollnote)
     keeps = parse_keeps(rollnote, rolls['rolls'])
     mods = parse_mods(rollnote)

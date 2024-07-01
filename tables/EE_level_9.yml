@@ -3,7 +3,7 @@
 table-name: "Illumination Type"
 group: "Decor"
 roll: "1d12"
-result:
+results:
   1: "Brazier: One per 40 swaure feet"
   2: "Torch/Sconce: One per 30 square feet"
   3: "Torch/Sconce: One per 60 square feet"
@@ -21,7 +21,7 @@ result:
 table-name: "Room Contents"
 group: "Rooms"
 roll: "1d20"
-result:
+results:
   1: "Statue: [1@General Statues]"
   2: "Rotted furnishings (indistinguishable)"
   3: "Rotted furnishings (indistinguishable)"
@@ -39,7 +39,7 @@ result:
   15: "Prison: [1@Prison Room Type]"
   16: "Arcane: [1@Arcane Room Type]"
   17: "Stair: [1@Stair Room Type]"
-  18: "Fountain: [1@Fountain General]"
+  18: "Fountain: [1@Fountain, General]"
   19: "Special: [1@Special I Room Type]"
   20: "Special: [1@Special II Room Type]"
 
@@ -47,25 +47,25 @@ result:
 table-name: "General Statues"
 group: "Decor"
 roll: "1d12"
-result:
+results:
   1: "Statue of random monster: [1@Monsters]"
   2: "Statue of non-human adventurer: [1@Adventurer, Race] [1@Adventurer, Class]"
   3: "Statue of human adventurer: [1@Adventurer, Class]"
   4: "Statue of humanoid: [1@Humanoids]"
   5: "Statue of a god/goddess: [1@God/Goddess]"
-  6: "Broken/defaced statue: [1@General Statue]"
-  7: "Statue, oracle [1@General Statue]"
-  8: "Statue and one treasure: [1@General Statue] [1@Treasure Container]"
-  9: "Statue, trapped: [1@General Statue] [1@Trap, Container/Statue/Treasure]"
+  6: "Broken/defaced statue: [1@General Statues]"
+  7: "Statue, oracle [1@General Statues]"
+  8: "Statue and one treasure: [1@General Statues] [1@Treasure Container]"
+  9: "Statue, trapped: [1@General Statues] [1@Trap, Container/Statue/Treasure]"
   10: "Statue, petrified adventurer: [1@Adventurer, Race] [1@Adventurer, Class]"
   11: "Statue, replica of a character"
-  12: "Statue, animates: [1@General Statue]"
+  12: "Statue, animates: [1@General Statues]"
 
 ---
 table-name: "Religious Room Type"
 group: "Rooms"
 roll: "1d12"
-result:
+results:
   1: "Shrine"
   2: "Desecrated shrine"
   3: "Reliquary"
@@ -83,7 +83,7 @@ result:
 table-name: "Magical Alter"
 group: "Decor"
 roll: "1d4"
-result:
+results:
   1: "Normal weapon placed on alter becomes a +1 weapon of the appropriate type"
   2: "Creature is resurrected"
   3: "Creature regains all hit points and is cured of poison, lycanthropy, and disease"
@@ -93,7 +93,7 @@ result:
 table-name: "Crypt Room Type"
 group: "Rooms"
 roll: "1d8"
-result:
+results:
   1: "Solitary coffin: empty; opened or unsealed"
   2: "Solitary coffin corpse; unopened, sealed"
   3: "Multiple coffins: empty; opened or unsealed"
@@ -107,7 +107,7 @@ result:
 table-name: "Military Room Type"
 group: "Rooms"
 roll: "1d12"
-result:
+results:
   1: "Barrakcs, abandoned"
   2: "Barracks, occupied"
   3: "Barracks, occupied"
@@ -125,7 +125,7 @@ result:
 table-name: "Prison Room Type"
 group: "Rooms"
 roll: "1d6"
-result:
+results:
   1: "Torture chamber"
   2: "Guard post"
   3: "Guard post"
@@ -137,7 +137,7 @@ result:
 table-name: "Arcane Room Type"
 group: "Rooms"
 roll: "1d6"
-result:
+results:
   1: "Library"
   2: "Study"
   3: "Laboratory, chemical"
@@ -149,7 +149,7 @@ result:
 table-name: "Stair Room Type"
 group: "Rooms"
 roll: "1d6"
-result:
+results:
   1: "Open stair up one level"
   2: "Open stair down one level"
   3: "Collapsed stair, no passage"
@@ -161,7 +161,7 @@ result:
 table-name: "Fountain, General"
 group: "Decor"
 roll: "1d6"
-result:
+results:
   1: "Nonmagical; Clear, cool water. Refreshing"
   2: "Nonmagical; Dingy, room temperature"
   3: "Nonmagical; Algea-covered, dirty water. Drinking causes disease."
@@ -173,7 +173,7 @@ result:
 table-name: "Fountain, Magical"
 group: "Decor"
 roll: "1d12"
-result:
+results:
   1: "Character regains all hit points."
   2: "Character's hit point maximum increases by two."
   3: "One random ability score of the character increases by one. Another random ability score decreases by one."
@@ -191,7 +191,7 @@ result:
 table-name: "Special I Room Type"
 group: "Rooms"
 roll: "1d10"
-result:
+results:
   1: "Well"
   2: "Collapsed: [1@Room Contents]"
   3: "Flooded: [1@Room Contents]"
@@ -207,7 +207,7 @@ result:
 table-name: "Special II Room Type"
 group: "Rooms"
 roll: "1d8"
-result:
+results:
   1: "Spy outpost"
   2: "Giant outpost"
   3: "Dragon outpost lair"
@@ -221,9 +221,9 @@ result:
 table-name: "Corridor Contents"
 group: "Rooms"
 roll: "1d8"
-result:
+results:
   1: "Trap: [1@Trap, Corridor, Alcove, or Hall]"
-  2: "Monster with one treasure: [1@Monster] [1@Treasure Container]"
+  2: "Monster with one treasure: [1@Monsters] [1@Treasure Container]"
   3: "Monster with no treasure"
   4: "Empty corridor"
   5: "Empty corridor"
@@ -235,7 +235,7 @@ result:
 table-name: "Corridor, Special"
 group: "Rooms"
 roll: "1d4"
-result:
+results:
   1: "Stairs up/exit"
   2: "Stairs down (next level)"
   3: "Collapsed stair up (no passage)"
@@ -245,7 +245,7 @@ result:
 table-name: "Room Detail"
 group: "Decor"
 roll: "1d16"
-result:
+results:
   1: "Trap: [1@Trap, Chamber Entrance]"
   2: "Monster with no treasure: [1@Monsters]"
   3: "Monster with no treasure: [1@Monsters]"
@@ -259,7 +259,7 @@ result:
   11: "No monster or treasure"
   12: "No monster or treasure"
   13: "Treasure: [1@Treasure Container]"
-  14: "Treasure, trapped: [1@Treasyre Container] [1@Trap, Container/Staute/Treasure]"
+  14: "Treasure, trapped: [1@Treasure Container] [1@Trap, Container/Statue/Treasure]"
   15: "Two monsters (allied): [2@Monsters]"
   16: "Two monsters (fighting): [2@Monsters]"
 
@@ -267,7 +267,7 @@ result:
 table-name: "Treasure Container"
 group: "Treasures"
 roll: "1d20"
-result:
+results:
   1: "Chest, no trap"
   2: "Chest, no trap"
   3: "Chest, no trap, locked"
@@ -293,7 +293,7 @@ result:
 table-name: "Trap, Container/Statue/Treasure"
 group: "Traps"
 roll: "1d20"
-result:
+results:
   1: "Contact Poison: Succeed on a DC 18 Constitution save or take 2d12 poison damage. Detected with a successful DC 19 Intelligence (Investiagation) check."
   2: "Contact Poison: Succeed on a DC 18 Constitution save or berserk for 2d6 rounds. While berserk, use action to attack nearest creature; may repeat save at end of each turn. Detected with a successdul DC 19 Intellifence (Investigation) check."
   3: "Poisonous gas: All creatures within 20 feet succeed on a DC 18 Constitution save or take 2d12 poison damage."
@@ -319,7 +319,7 @@ result:
 table-name: "Trap, Chamber Entrance"
 group: "Traps"
 roll: "1d12"
-result:
+results:
   1: "Dart: 8 darts, succeed on a DC 18 Dexterity save for each or take 2d6+1 piercing damage."
   2: "Dart: 4 darts, succeed on a DC 18 Dexterity save for each or take 2d6+1 piercing damage and succeed ona DC 18 Constitution save or be paralyzed for 10-30 minutes."
   3: "falling block: A stone falls from ceiling; succeed on a DC 18 Dexterity check or take 5d6 bludgeoning damage."
@@ -337,16 +337,16 @@ result:
 table-name: "Trap, Corridor, Alcove, or Hall"
 group: "Traps"
 roll: "1d12"
-result:
+results:
   1: "Dart: 8 darts, succeed on a DC Dexterity save for each or take 2d6+1 piercing damage."
   2: "Dart: 4 darts, succeed on a DC 18 Dexterity save for each or take 2d6+1 piercing damage and succeed on a DC 18 Constitution save or be paralyzed for 10-30 minutes."
   3: "Falling block: Stone falls ffrom ceiling; succeed on a DC 18 Dexterity check or take 5d6 bludgeoning damage."
   4: "Falling block: Stones fall from ceiling; all creatures within 20 feet succeed on DC 18 Dexterity check or take 2d12 bludgeoning damage."
   5: "Pit: A 10-foot-by-10-foot covered trap, 30 feet deep; succeed on a DC 18 Dexterity save or take 3d6+1 bludgeoning damage from falling in."
   6: "Pit: A 10-foot-by-20-foot covered trap, 30 feet deep; succeed on a DC 18 Decterity save or take 3d6+1 bludgeoning damage from falling in."
-  7: "Loud Gong: Roll for wandering monster: [1@Monster]"
+  7: "Loud Gong: Roll for wandering monster: [1@Monsters]"
   8: "Blade: Succeed on a DC 18 Dexterity save or take 3d8+1 slashing damage from falling in."
-  9: "javelins: 1d4+2 javelins, succeed on a DC 18 Dexterity save for each or take 2d6+2 piercing damage."
+  9: "Javelins: 1d4+2 javelins, succeed on a DC 18 Dexterity save for each or take 2d6+2 piercing damage."
   10: "Poisonous Gas: All creatures within 20 feet succeed on DC 18 Constitution save or poisoned for one minute and 2d6+1 poison damage each round; may repeat save at end of each turn, ending effect and damage on success."
   11: "Anti-magic: Character cannot use magic (spell, decive, etc.) for one hour."
   12: "Acid Spray: All creatures within 10 feet succeed on DC 18 Dexterity save or take 2d12 acid damage."
@@ -355,7 +355,7 @@ result:
 table-name: "Monster Reaction Roll"
 group: "Monsters"
 roll: "1d12"
-result:
+results:
   1: "Monster is new to area. Intelligent monsters attempt to talk to party to gain advantage."
   2: "Monster is simply passing through chamber and investigates the area."
   3: "Monster attempts to ambush party or other monsters in the area."
@@ -370,10 +370,10 @@ result:
   12: "Monster is very aggressive and attacks characters on sight."
 
 ---
-table-name: "Monster"
+table-name: "Monsters"
 group: "Monsters"
 roll: "1d100"
-result:
+results:
   1: "Orc ([2d8])"
   2: "Snake, Giant Fire ([1d3])"
   3: "Wyvern (1)"
@@ -479,7 +479,7 @@ result:
 table-name: "NPC Motivation"
 group: "NPCs"
 roll: "1d4"
-result:
+results:
   1: "Revenge"
   2: "Spy"
   3: "Quest"
@@ -489,7 +489,7 @@ result:
 table-name: "Alignment"
 group: "NPCs"
 roll: "1d10"
-result:
+results:
   1: "Chaotic Evil"
   2: "Chaotic Good"
   3: "Chaotic Neutral"
@@ -505,7 +505,7 @@ result:
 table-name: "Treasure"
 group: "Treasures"
 roll: "1d100"
-result:
+results:
   1: "Potion of healing (2)"
   2: "380 sp"
   3: "Spell scroll: heal"
@@ -611,7 +611,7 @@ result:
 table-name: "Adventurer, Race"
 group: "NPCs"
 roll: "1d10"
-result:
+results:
   1: "Dragonborn"
   2: "Dwarf"
   3: "Elf"
@@ -627,7 +627,7 @@ result:
 table-name: "Adventurer, Class"
 group: "NPCs"
 roll: "1d12"
-result:
+results:
   1: "Barbarian"
   2: "Bard"
   3: "Cleric"
@@ -645,7 +645,7 @@ result:
 table-name: "God/Goddess"
 group: "Deity"
 roll: "1d10"
-result:
+results:
   1: "Zeus"
   2: "Hera"
   3: "Athena"
@@ -661,7 +661,7 @@ result:
 table-name: "Humanoids"
 group: "NPCs"
 roll: "1d12"
-result:
+results:
   1: "Kobold"
   2: "Orc"
   3: "Goblin"
@@ -679,7 +679,7 @@ result:
 table-name: "Prisoner/Victim"
 group: "NPCs"
 roll: "1d12"
-result:
+results:
   1: "Noble/Military Commander"
   2: "Lesser Nobility"
   3: "Militia/Caravan Guard/Soldier"
@@ -689,7 +689,7 @@ result:
   7: "Villager"
   8: "Adventurer: [1@Adventurer, Race] [1@Adventurer, Class]"
   9: "Adventurer: [1@Adventurer, Race] [1@Adventurer, Class]"
-  10: "Humanoid: [1@Humanoid]"
-  11: "Humanoid: [1@Humanoid]"
-  12: "Humanoid: [1@Humanoid]"
+  10: "Humanoid: [1@Humanoids]"
+  11: "Humanoid: [1@Humanoids]"
+  12: "Humanoid: [1@Humanoids]"
 

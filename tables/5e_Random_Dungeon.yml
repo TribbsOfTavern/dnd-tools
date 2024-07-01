@@ -3,7 +3,7 @@
 table-name: "Starting Area"
 group: "dungeons"
 roll: "1d10"
-result:
+results:
   1: "Square, 20 x 20 ft.; passage on each wall"
   2: "Square, 20 x 20 ft.; door on two walls, passage in third wall"
   3: "Square, 40 x 40 ft., doors on three walls"
@@ -19,7 +19,7 @@ result:
 table-name: "Passage"
 group: "dungeons"
 roll: "1d20"
-result:
+results:
   1: "Continue straight 30 ft., no doors or side passages"
   2: "Continue straight 30 ft., no doors or side passages"
   3: "Continue straight 20 ft., door to the right, then an additional 10 ft. ahead"
@@ -45,7 +45,7 @@ result:
 table-name: "Passage Width, Small"
 group: "dungeons"
 roll: "1d12"
-result:
+results:
   1: "5 ft."
   2: "5 ft."
   3: "10 ft."
@@ -63,7 +63,7 @@ result:
 table-name: "Passage Width, Large"
 group: "dungeons"
 roll: "1d20"
-result:
+results:
   1: "5 ft."
   2: "5 ft."
   3: "10 ft."
@@ -89,7 +89,7 @@ result:
 table-name: "Door Type"
 group: "dungeons"
 roll: "1d20"
-result: 
+results: 
   1: "Wooden"
   2: "Wooden"
   3: "Wooden"
@@ -114,7 +114,7 @@ result:
 table-name: "Beyond A Door"
 group: "dungeons"
 roll: "1d20"
-result:
+results:
   1: "Passage extending 10 ft., then T intersection extending 10 ft. to the right and left"
   2: "Passage extending 10 ft., then T intersection extending 10 ft. to the right and left"
   3: "Passage 20 ft. straight ahead"
@@ -140,7 +140,7 @@ result:
 table-name: "Chamber"
 group: "dungeons"
 roll: "1d20"
-result: 
+results: 
   1: "Square 20 x 20 ft.; [1@Chamber Exits, Normal] exits"
   2: "Square 20 x 20 ft.; [1@Chamber Exits, Normal] exits"
   3: "Square 30 x 30 ft.; [1@Chamber Exits, Normal] exits"
@@ -166,7 +166,7 @@ result:
 table-name: "Chamber Exits, Normal"
 group: "dungeons"
 roll: "1d20"
-result:
+results:
   1: "0"
   2: "0"
   3: "0"
@@ -192,7 +192,7 @@ result:
 table-name: "Chamber Exits, Large"
 group: "dungeons"
 roll: "1d20"
-result:
+results:
   1: "0"
   2: "0"
   3: "0"
@@ -218,7 +218,7 @@ result:
 table-name: "Stairs"
 group: "dungeons"
 roll: "1d20"
-result:
+results:
   1: "Down one level to a chamber"
   2: "Down one level to a chamber"
   3: "Down one level to a chamber"
@@ -244,7 +244,7 @@ result:
 table-name: "Dungeon, Death Trap"
 group: "dungeon purpose"
 roll: "1d20"
-result:
+results:
   1: "Antechamber or waiting room for spectators"
   2: "guardroom fortified against intruders"
   3: "guardroom fortified against intruders"
@@ -270,7 +270,7 @@ result:
 table-name: "Dungeon, Lair"
 group: "dungeon purpose"
 roll: "1d20"
-result:
+results:
   1: "Armory stocked with weapons and armor"
   2: "Audiance chamber, used to recieve guests"
   3: "Banquet room for important celebrations"
@@ -296,7 +296,7 @@ result:
 table-name: "Dungeon, Maze"
 group: "dungeon purpose"
 roll: "1d20"
-result:
+results:
   1: "Conjuring room, used to summon creatures that guard the maze"
   2: "Guardroom for sentinels that patrol the maze"
   3: "Guardroom for sentinels that patrol the maze"
@@ -322,7 +322,7 @@ result:
 table-name: "Dungeon, Mine"
 group: "dungeon purpose"
 roll: "1d20"
-result:
+results:
   1: "Barracks for miners"
   2: "Barracks for miners"
   3: "Bedroom for a supervisor or manager"
@@ -348,7 +348,7 @@ result:
 table-name: "Dungeon, Planar Gate"
 group: "dungeon purpose"
 roll: "1d100"
-result:
+results:
   1: "Decorated foyer or antechamber"
   2: "Decorated foyer or antechamber"
   3: "Decorated foyer or antechamber"
@@ -454,7 +454,7 @@ result:
 table-name: "Dungeon, Stronghold"
 group: "dungeon purpose"
 roll: "1d100"
-result:
+results:
   1: "Antechamber where visitors seeking access to the stronghold wait"
   2: "Antechamber where visitors seeking access to the stronghold wait"
   3: "Armory holding high-quality gear, including light siege weapons such as ballistas"
@@ -560,7 +560,7 @@ result:
 table-name: "Dungeon, Temple or Shrine"
 group: "dungeon purpose"
 roll: "1d100"
-result:
+results:
   1: "Armory filled with weapons and armor, battle banners, and pennants"
   2: "Armory filled with weapons and armor, battle banners, and pennants"
   3: "Armory filled with weapons and armor, battle banners, and pennants"
@@ -666,7 +666,7 @@ result:
 table-name: "Dungeon, Tomb"
 group: "dungeon purpose"
 roll: "1d20"
-result:
+results:
   1: "Antechamber for those that have come to pay respect to the dead or prepare themselves for burial ritual"
   2: "Chapel dedicated to deities that watch over the dead and protect their resting places"
   3: "Chapel dedicated to deities that watch over the dead and protect their resting places"
@@ -692,7 +692,7 @@ result:
 table-name: "Dungeon, Treasure Vault"
 group: "dungeon purpose"
 roll: "1d20"
-result:
+results:
   1: "Antechamber for visiting dignitaries"
   2: "Armory containing mundane and magic gear used by the treasure vault's guard"
   3: "Barracks for guards"
@@ -718,7 +718,7 @@ result:
 table-name: "Dungeon, General Chambers"
 group: "dungeon purpose"
 roll: "1d100"
-result:
+results:
   1: "Antechamber"
   2: "Armory"
   3: "Armory"
@@ -824,7 +824,7 @@ result:
 table-name: "Current Chamber State"
 group: "dungeon decor"
 roll: "1d20"
-result:
+results:
   1: "Rubble, ceiling partially collapsed"
   2: "Rubble, ceiling partially collapsed"
   3: "Rubble, ceiling partially collapsed"
@@ -850,7 +850,7 @@ result:
 table-name: "Chamber Contents"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Monster (dominant inhabitant)"
   2: "Monster (dominant inhabitant)"
   3: "Monster (dominant inhabitant)"
@@ -956,7 +956,7 @@ result:
 table-name: "Monster Motivation"
 group: "dungeon decor"
 roll: "1d20"
-result:
+results:
   1: "Find a sanctuary"
   2: "Find a sanctuary"
   3: "Conquor the dungeon"
@@ -982,7 +982,7 @@ result:
 table-name: "Dungeon Hazards"
 group: "dungeon decor"
 roll: "1d20"
-result:
+results:
   1: "Brown mold"
   2: "Brown mold"
   3: "Brown mold"
@@ -1008,7 +1008,7 @@ result:
 table-name: "Dungeon Obstacles"
 group: "dungeon decor"
 roll: "1d20"
-result:
+results:
   1: "Antilife aura with a radius of 1d10 x 10 ft.; while in the aura, living creatures can't regain hit points"
   2: "Battering winds reduce speed by half, impose disadvantage on ranged attack rolls"
   3: "Blade barrier blocks passage"
@@ -1034,7 +1034,7 @@ result:
 table-name: "Trap Trigger"
 group: "dungeon traps"
 roll: "1d6"
-result:
+results:
   1: "Stepped on (floor, stairs)"
   2: "Moved through (doorway, hallway)"
   3: "Touched (doorknob, statue)"
@@ -1046,7 +1046,7 @@ result:
 table-name: "Trap Damage Severity"
 group: "dungeon traps"
 roll: "1d6"
-result:
+results:
   1: "Setback"
   2: "Setback"
   3: "Dangerous"
@@ -1058,7 +1058,7 @@ result:
 table-name: "Trap Effect"
 group: "dungeon traps"
 roll: "1d100"
-result:
+results:
   1: "Magic missles shoot from a statue or object"
   2: "Magic missles shoot from a statue or object"
   3: "Magic missles shoot from a statue or object"
@@ -1164,7 +1164,7 @@ result:
 table-name: "Trick Object"
 group: "dungeon tricks"
 roll: "1d20"
-result:
+results:
   1: "Book"
   2: "Brain preserved in a jar"
   3: "Burning fire"
@@ -1190,7 +1190,7 @@ result:
 table-name: "Trick Effect"
 group: "dungeon tricks"
 roll: "1d100"
-result:
+results:
   1: "Ages the first person to touch the object"
   2: "Ages the first person to touch the object"
   3: "Ages the first person to touch the object"
@@ -1296,7 +1296,7 @@ result:
 table-name: "Dungeon Noises"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Bang or slam"
   2: "Bang or slam"
   3: "Bang or slam"
@@ -1402,7 +1402,7 @@ result:
 table-name: "Dungeon Air"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Clear and damp"
   2: "Clear and damp"
   3: "Clear and damp"
@@ -1508,7 +1508,7 @@ result:
 table-name: "Dungeon Oders"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Acrid"
   2: "Acrid"
   3: "Acrid"
@@ -1614,7 +1614,7 @@ result:
 table-name: "Dungeon General Features"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Arrow, broken"
   2: "Ashes"
   3: "Ashes"
@@ -1720,7 +1720,7 @@ result:
 table-name: "General Furnishings and Appointments"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Alter"
   2: "Armchair"
   3: "Armoire"
@@ -1826,7 +1826,7 @@ result:
 table-name: "Religious Articles and Furnishings"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Alter"
   2: "Alter"
   3: "Alter"
@@ -1932,7 +1932,7 @@ result:
 table-name: "Mage Furnishings"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Alembic"
   2: "Alembic"
   3: "Alembic"
@@ -2038,7 +2038,7 @@ result:
 table-name: "Utensils and Personal Items"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Awl"
   2: "Bandages"
   3: "Basin"
@@ -2144,7 +2144,7 @@ result:
 table-name: "Container Contents"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Ash"
   2: "Ash"
   3: "Ash"
@@ -2250,7 +2250,7 @@ result:
 table-name: "Books, Scrolls, and Tomes"
 group: "dungeon decor"
 roll: "1d100"
-result:
+results:
   1: "Account records"
   2: "Account records"
   3: "Alchemist's notebook"

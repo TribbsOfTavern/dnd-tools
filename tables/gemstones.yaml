@@ -4,7 +4,7 @@
 ---
 table-name: "10 GP Gemstones"
 roll: "1d12"
-result:
+results:
   1: "Azurite"
   2: "Banded Agate"
   3: "Blue Quartz"
@@ -12,6 +12,7 @@ result:
   5: "Hematite"
   6: "Lapis Lazuli"
   7: "Malachite"
+  8: "Moss Agate"
   9: "Obsidian"
   10: "Rhodochrosite"
   11: "Tiger Eye"
@@ -20,7 +21,7 @@ result:
 ---
 table-name: "50 GP Gemstones"
 roll: "1d12"
-result: 
+results: 
   1: "Bloodstone"
   2: "Camelian"
   3: "Chalcedony"
@@ -37,7 +38,7 @@ result:
 ---
 table-name: "500 GP Gemstones"
 roll: "1d6"
-result:
+results:
   1: "Alexandrite"
   2: "Aquamarine"
   3: "Black Pearl"
@@ -48,7 +49,7 @@ result:
 ---
 table-name: "1000 GP Gemstones"
 roll: "1d8"
-result:
+results:
   1: "Black Opal"
   2: "Blue Sapphire"
   3: "Emerald"
@@ -61,7 +62,7 @@ result:
 ---
 table-name: "5000 GP Gemstones"
 roll: "1d4"
-result:
+results:
   1: "Black Sapphire"
   2: "Diamond"
   3: "Jacinth"

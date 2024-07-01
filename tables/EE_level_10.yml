@@ -3,7 +3,7 @@
 table-name: "Illumination Type"
 group: "Decor"
 roll: "1d12"
-result:
+results:
   1: "Brazier: One per 40 square feet"
   2: "Torch/Sconce: One per 30 square feet"
   3: "Torch/Sconce: One per 60 square feet"
@@ -21,7 +21,7 @@ result:
 table-name: "Room Contents"
 group: "Rooms"
 roll: "1d20"
-result:
+results:
   1: "Statues: [1@General Statues]"
   2: "Rotted furnishings (indistinguishable)"
   3: "Rotted furnishings (indistinguishable)"
@@ -44,27 +44,28 @@ result:
   20: "Special: [1@Special II Room Type]"
 
 ---
-table-name: "General Statue"
+table-name: "General Statues"
 group: "Decor"
 roll: "1d12"
-result: 
+results: 
   1: "Statue of random monster: [1@Monster]"
   2: "Statue of non-human adventurer: [1@Adventurer, Race] [1@Adventurer, Class]"
   3: "Statue of human adventurer: [1@Adventurer, Class]"
-  4: "Statue of humanoid: [1@Humanoid]"
+  4: "Statue of humanoid: [1@Humanoids]"
   5: "Statue of a god/goddess: [1@God/Goddess]"
-  6: "Broken/defaced statue: [1@General Statue]"
-  7: "Statue, oracle: [1@General Statue]"
-  8: "Statue and one treasure: [1@General Statue] [1@Treasure Container]"
+  6: "Broken/defaced statue: [1@General Statues]"
+  7: "Statue, oracle: [1@General Statues]"
+  8: "Statue and one treasure: [1@General Statues] [1@Treasure Container]"
+  9: "Statue, Trapped [Trap, Container/Statue/Treasure]"
   10: "Statue, petrified adventurer: [1@Adventurer, Race] [1@Adventurer, Class]"
   11: "Statue, replica of a character"
-  12: "Statue, animates: [1@General Statue]"
+  12: "Statue, animates: [1@General Statues]"
 
 ---
 table-name: "Religious Room Type"
 group: "Rooms"
 roll: "1d12"
-result:
+results:
   1: "Shrine"
   2: "Desecrated shrine"
   3: "Reliquary"
@@ -82,7 +83,7 @@ result:
 table-name: "Magical Alter"
 group: "Rooms"
 roll: "1d4"
-result:
+results:
   1: "Normal weapon placed on alter becomes a +1 weapon of the appropriate type"
   2: "Creature is resurrected"
   3: "Creature regains all hit points and is cured of poison, lycanthropy, and disease"
@@ -92,7 +93,7 @@ result:
 table-name: "Crypt Room Type"
 group: "Rooms"
 roll: "1d8"
-result:
+results:
   1: "Solitary coffin: empty; opened or unsealed"
   2: "Solitary coffin: corpse; unopened, sealed"
   3: "Multiple coffins: empty; opened or unsealed"
@@ -106,7 +107,7 @@ result:
 table-name: "Military Room Type"
 group: "Rooms"
 roll: "1d12"
-result:
+results:
   1: "Barracks, abandoned"
   2: "Barracks, occupied"
   3: "Barracks, occupied"
@@ -124,7 +125,7 @@ result:
 table-name: "Prison Room Type"
 group: "Rooms"
 roll: "1d6"
-result:
+results:
   1: "Torture Chamber"
   2: "Guarded Post"
   3: "Guarded Post"
@@ -136,7 +137,7 @@ result:
 table-name: "Arcane Room Type"
 group: "Rooms"
 roll: "1d6"
-result:
+results:
   1: "Library"
   2: "Study"
   3: "Laboratory, chemical"
@@ -148,7 +149,7 @@ result:
 table-name: "Stair Room Type"
 group: "Rooms"
 roll: "1d6"
-result:
+results:
   1: "Open stair up one level"
   2: "Open stair down on level"
   3: "Collapsed stair, no passage"
@@ -160,7 +161,7 @@ result:
 table-name: "Fountain, General"
 group: "Decor"
 roll: "1d6"
-result:
+results:
   1: "Nonmagical; Clear, cool water. Refreshing"
   2: "Nonmagical; Dingy, room temperature."
   3: "Nonmagical; Algea-covered, dirtyy water. Drinking causes disease."
@@ -172,7 +173,7 @@ result:
 table-name: "Fountain, Magical"
 group: "Decor"
 roll: "1d12"
-result:
+results:
   1: "Chracter regains all hit points"
   2: "Character's hit point maximum increases by two"
   3: "One random ability score of the character increases by one. Another random ability score decreases by one."
@@ -190,15 +191,15 @@ result:
 table-name: "Special I Room Type"
 group: "Rooms"
 roll: "1d10"
-result:
+results:
   1: "Well"
-  2: "Collapsed: [1@Room Content]"
-  3: "Flooded: [1@Room Content]"
-  4: "Teleportation: [1@Room Content]"
-  5: "Elemental gate: [1@Room Content]"
-  6: "Abyssal gate: [1@Room Content]"
-  7: "Locked: [1@Room Content]"
-  8: "Locked and trapped; [1@Room Content]; [1@Trap, Container/Statue/Treasure]"
+  2: "Collapsed: [1@Room Contents]"
+  3: "Flooded: [1@Room Contents]"
+  4: "Teleportation: [1@Room Contents]"
+  5: "Elemental gate: [1@Room Contents]"
+  6: "Abyssal gate: [1@Room Contents]"
+  7: "Locked: [1@Room Contents]"
+  8: "Locked and trapped; [1@Room Contents]; [1@Trap, Container/Statue/Treasure]"
   9: "Room contains illusion of sleeping creature [1@Monster]"
   10: "On magic item hidden within the chamber"
 
@@ -206,7 +207,7 @@ result:
 table-name: "Special II Room Type"
 group: "Rooms"
 roll: "1d8"
-result:
+results:
   1: "Spy outpost"
   2: "Giant outpost"
   3: "Dragon outpost lair"
@@ -220,7 +221,7 @@ result:
 table-name: "Corridor Contents"
 group: "Rooms"
 roll: "1d8"
-result:
+results:
   1: "Trap: [1@Trap, Corridor, Alcove, or Hall]"
   2: "Monster with one treasure: [1@Monster] [1@Treasure Container]"
   3: "Monster with no treasure: [1@Monster]"
@@ -234,7 +235,7 @@ result:
 table-name: "Corridor, Special"
 group: "Rooms"
 roll: "1d4"
-result:
+results:
   1: "Stairs up / exit"
   2: "Stairs down (next level)"
   3: "Collapsed stairs up (no passage)"
@@ -244,7 +245,7 @@ result:
 table-name: "Room Detail"
 group: "Decor"
 roll: "1d16"
-result:
+results:
   1: "Trap: [1@Trap, Chamber Entrance]"
   2: "Monster with no treasure: [1@Monster]"
   3: "Monster with no treasure: [1@Monster]"
@@ -254,7 +255,7 @@ result:
   7: "Monster with two treasure: [1@Monster] [2@Treasure Container]"
   8: "Monster with two treasure: [1@Monster] [2@Treasure Container]"
   9: "Monster with three treasures: [1@Monster] [3@Treasure Container]"
-  10: "Monster with one treasure; trapped: [1@Monster] [1@Tresaure Container]; [1@Trap, Container/Statue/Treasure]"
+  10: "Monster with one treasure; trapped: [1@Monster] [1@Treasure Container]; [1@Trap, Container/Statue/Treasure]"
   11: "No monster or treasure"
   12: "No monster or treasure"
   13: "Treasure: [1@Treasure Container]"
@@ -266,7 +267,7 @@ result:
 table-name: "Treasure Container"
 group: "Treasures"
 roll: "1d20"
-result:
+results:
   1: "Chest, no trap"
   2: "Chest, no trap"
   3: "Chest, no trap, locked"
@@ -292,7 +293,7 @@ result:
 table-name: "Trap, Container/Statue/Treasure"
 group: "Traps"
 roll: "1d20"
-result:
+results:
   1: "Contact poison: Succeed on a DC 19 Constiutution save or take 3d10 poison damage. Detected with a successful DC 20 Intelligence (Investigation) check."
   2: "Contact poison: Succeed on a DC 19 Constitution save or berserk for 2d6 rounds. While berserk, use action to attack nearest creature; may repeat save at end of each turn. Detected with a successful DC 20 intelligence (Investigation) check."
   3: "Poisonous gas: All creatures within 20 feet succeed on a DC 19 Constitution save or take 3d10 poison damage."
@@ -318,7 +319,7 @@ result:
 table-name: "Trap, Chamber Entrance"
 group: "Traps"
 roll: "1d12"
-result:
+results:
   1: "Dart: 8 darts, succeed on a DC 19 Dexterity save for each or take 2d6+2 piercing damage"
   2: "Dart: 3 darts, succeed on a DC 19 Dexterity save for each ot take 2d6+2 piercing damage and succeed on a DC 19 Constitution save or be paralyzed for 10-30 minutes"
   3: "Falling block: A stone falls from ceiling; succeed on a DC 19 Dexterity check or take 5d8 bludgeoning damage."
@@ -336,7 +337,7 @@ result:
 table-name: "Trap, Corridor, Alcove, or Hall"
 group: "Traps"
 roll: "1d12"
-result:
+results:
   1: "Dart: 8 darts, succeed on a Dc 19 Dexterity save for each or take 2d6+2 piercing damage"
   2: "Dart: 4 darts, succeed on a DC 19 Dexterity save for each ot take 2d6+2 piercing damage and succeed on a DC 18 Constitution save or be paralyzed for 10-30 minutes"
   3: "Falling block: Stone falls from ceiling; succeed on a DC 19 Dexterity check or take 5d8 bludgeoning damage"
@@ -354,7 +355,7 @@ result:
 table-name: "Monster Reaction Roll"
 group: "Monsters"
 roll: "1d12"
-result: 
+results: 
   1: "Monster is new to area. Intelligent monsters attempt to talk to party to gain advantage."
   2: "Monster is simply passing through chamber and investigates the area."
   3: "Monster attempts to ambush party or other monsters in the area."
@@ -372,7 +373,7 @@ result:
 table-name: "Monster"
 group: "Monsters"
 roll: "1d100"
-result:
+results:
   1: "Orc ([2d8])"
   2: "Snake, Fire ([1d3])"
   3: "Wyvern (1)"
@@ -478,7 +479,7 @@ result:
 table-name: "NPC Motivation"
 group: "NPCs"
 roll: "1d4" 
-result:
+results:
   1: "Revenge"
   2: "Spy"
   3: "Quest"
@@ -488,7 +489,7 @@ result:
 table-name: "Alignment"
 group: "NPCs"
 roll: "1d10"
-result:
+results:
   1: "Chaotic Evil"
   2: "Chaotic Good"
   3: "Chaotic Neutral"
@@ -504,7 +505,7 @@ result:
 table-name: "Treasure"
 group: "Treasures"
 roll: "1d100"
-result:
+results:
   1: "512 gp"
   2: "18 sp"
   3: "50 cp"
@@ -610,7 +611,7 @@ result:
 table-name: "Adventurer, Race"
 group: "NPCs"
 roll: "1d10"
-result:
+results:
   1: "Dragonborn"
   2: "Dwarf"
   3: "Elf"
@@ -626,7 +627,7 @@ result:
 table-name: "Adventurer, Class"
 group: "NPCs"
 roll: "1d12"
-result:
+results:
   1: "Barbarian"
   2: "Bard"
   3: "Cleric"
@@ -644,7 +645,7 @@ result:
 table-name: "God/Goddess"
 group: "Diety"
 roll: "1d10"
-result:
+results:
   1: "Zeus"
   2: "Hera"
   3: "Athena"
@@ -660,7 +661,7 @@ result:
 table-name: "Humanoids"
 group: "NPCs"
 roll: "1d12"
-result:
+results:
   1: "Kobold"
   2: "Orc"
   3: "Goblin"
@@ -678,7 +679,7 @@ result:
 table-name: "Prisoner/Victim"
 group: "NPCs"
 roll: "1d12"
-result:
+results:
   1: "Noble/Military Commander"
   2: "Lesser Nobility"
   3: "Militia/Caravan Guard/Soldier"

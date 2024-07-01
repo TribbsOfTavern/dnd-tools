@@ -4,7 +4,7 @@
 ---
 table-name: "25 GP Art Objects"
 roll: "1d10"
-result:
+results:
   1: "Silver Ewer"
   2: "Carved bone statuette"
   3: "Small gold bracelet"
@@ -19,7 +19,7 @@ result:
 ---
 table-name: "250 GP Art Objects"
 roll: "1d10"
-result:
+results:
   1: "Gold ring set with bloodstones"
   2: "Carved ivory statuette"
   3: "Large gold bracelet"
@@ -34,7 +34,7 @@ result:
 ---
 table-name: "750 GP Art Objects"
 roll: "1d10"
-result:
+results:
   1: "Silver chalice set with moonstones"
   2: "Silver-plated steel longsword with jet set in hilt"
   3: "Carved harp of exotic wood with ivory inlay and zircon gems"
@@ -49,7 +49,7 @@ result:
 ---
 table-name: "2500 GP Art Objects"
 roll: "1d10"
-result:
+results:
   1: "Fine gold chain set with a fire opal"
   2: "Old masterpiece painting"
   3: "Embroidered silk and velvet mantle set with numerous moonstones"
@@ -64,7 +64,7 @@ result:
 ---
 table-name: "7500 GP Art Objects"
 roll: "1d8"
-result:
+results:
   1: "Jeweled gold crown"
   2: "Jeweled platinum ring"
   3: "Small gold statuette set with rubies"

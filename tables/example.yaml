@@ -7,7 +7,7 @@
 table-name: "Example Table 1"
 group: "examples"
 roll: "1d6"
-result:
+results:
   1: "Example A"
   2: "Example B"
   3: "Example C"
@@ -22,7 +22,7 @@ result:
 table-name: "Example Table 2"
 group: "examples"
 roll: "length"
-result:
+results:
   1: "Example A"
   2: "Example B"
   3: "Example C"
@@ -38,7 +38,7 @@ result:
 table-name: "Example Table 3"
 group: "examples"
 roll: "1d4"
-result:
+results:
   1: "Nothing linked"
   2: "Roll Twice on Example Table 2[2@Example Table 2]"
   3: "Roll once on [1@Example Table 1]"
@@ -51,7 +51,7 @@ result:
 table-name: "Example Table 4"
 group: "examples"
 roll: "1d4"
-result:
+results:
   1: "Example A: [2d12] Copper Coins" # roll 2d12
   2: "Example B: [2d6+2] Silver Coins" # roll 2d6 add 2
   3: "Example C: [1d6] Gold Coins"  # roll 1d6

@@ -5,7 +5,7 @@ required-tables:
     - "Spells 1st Level"
     - "Spells 2nd Level"
 roll: "1d100"
-result:
+results:
     1: "Potion of Healing"
     2: "Potion of Healing"
     3: "Potion of Healing"
@@ -120,7 +120,7 @@ required-tables:
     - "Spells 2nd Level"
     - "Spells 3rd Level"
 roll: "1d100"
-result:
+results:
     1: "Potion of Greater Healing"
     2: "Potion of Greater Healing"
     3: "Potion of Greater Healing"
@@ -244,7 +244,7 @@ required-tables:
     - "Spells 4th Level"
     - "Spells 5th Level"
 roll: "1d100"
-result:
+results:
     1: "Potion of superior healing"
     2: "Potion of superior healing"
     3: "Potion of superior healing"
@@ -373,7 +373,7 @@ required-tables:
     - "Spells 7th Level"
     - "Spells 8th Level"
 roll: "1d100"
-result:
+results:
     1: "Potion of supreme healing"
     2: "Potion of supreme healing"
     3: "Potion of supreme healing"
@@ -495,7 +495,7 @@ required-tables:
     - "Spells 8th level"
     - "Spells 9th level"
 roll: "1d100"
-result:
+results:
     1: "Spell Scroll (8th Level)"
     2: "Spell Scroll (8th Level)"
     3: "Spell Scroll (8th Level)"
@@ -607,7 +607,7 @@ table-name: "Magic Item Table F"
 required-tables:
     - "Weapons"
 roll: "1d100"
-result:
+results:
     1: "Weapon, +1"
     2: "Weapon, +1"
     3: "Weapon, +1"
@@ -740,7 +740,7 @@ required-tables:
     - "Figurines of Wonderous Power Rares"
     - "Base Weapons"
 roll: "1d100"
-result:
+results:
     1: "Weapon, +2"
     2: "Weapon, +2"
     3: "Weapon, +2"
@@ -847,7 +847,7 @@ table-name: "Magic Item Table H"
 required-tables: 
     - "Base Weapons"
 roll: "1d100"
-result:
+results:
     1: "Weapon, +3"
     2: "Weapon, +3"
     3: "Weapon, +3"
@@ -977,7 +977,7 @@ table-name: "Magic Item Table I"
 required-tables:
     - "Magic Armor Table"
 roll: "1d100"
-result:
+results:
     1: "Defender"
     6: "Hammer of thunderbolts"
     11: "Luck Blade"
@@ -1008,7 +1008,7 @@ result:
     76:
         table: ""
         roll: "1d12"
-        result:
+        results:
             1: Armor, +2 (half plate)
             2: Armor, +2 (half plate)
             3: Armor, +2 (plate)
@@ -1050,7 +1050,7 @@ result:
 table-name: "Magic Items Table G Figurines of Wonder"
 required-tables: ""
 roll: "1d8"
-result:
+results:
     1: "Figurine of wonderous power (Bronze griffon)"
     2: "Figurine of wonderous power (Ebony fly)"
     3: "Figurine of wonderous power (Golden lions)"

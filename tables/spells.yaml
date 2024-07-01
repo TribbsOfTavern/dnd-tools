@@ -4,7 +4,7 @@
 ---
 table-name: "Spells 0th Level"
 roll: "length"
-result:
+results:
     1: "Acid Splash"
     2: "Blade Ward"
     3: "Booming Blade"

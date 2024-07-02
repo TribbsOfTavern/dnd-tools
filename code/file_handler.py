@@ -18,7 +18,8 @@ class FileHandler:
     Each instance of the application should only need a single instance of the 
     FileHandler class to operate.
     """
-    def __init__(self, current_dir:str="./", exts:list=["yaml", "yml", "json"]):
+    def __init__(self, current_dir:str="./", exts:list=["yaml", "yml", "json"],
+        logs:bool=True):
         """
         Initialize the FileHandler, given a starting directory, and optionally
         available file extentions.
@@ -26,8 +27,10 @@ class FileHandler:
         """
         self._working_dir = current_dir
         self._exts = exts
+        self._logging = logs
 
-        fhandler_logger.debug("FileHandler initialized.")
+        if self._logging:
+            fhandler_logger.debug("FileHandler initialized.")
 
     @property
     def dir(self):
@@ -52,7 +55,8 @@ class FileHandler:
 
         if (not self.verifyFileExists(filename, d) or
         not self.verifyFileExtention(filename)):
-            main_logger.error(f"{filename} could not be loaded.")
+            if self._logging: 
+                main_logger.error(f"{filename} could not be loaded.")
             return {}
 
         out_data = None
@@ -78,7 +82,8 @@ class FileHandler:
         for file in all_files:
             print(file)
             if os.path.isfile(file) and file.split('.')[-1] in self._exts:
-                fhandler_logger.debug(f"Loaded {file}")
+                if self._logging: 
+                    fhandler_logger.debug(f"Loaded {file}")
                 all_dicts.append(self.loadFile(file, d))
 
                 ext = file.split('.')[-1]
@@ -165,7 +170,8 @@ class FileHandler:
                     loaded_dict[each['table-name']] = each
                 return loaded_dict
         except yaml.YAMLError as e:
-            fhandler_logger.error(f"Error parsing YAML file {path}: {e}")
+            if self._logging:
+                fhandler_logger.error(f"Error parsing YAML file {path}: {e}")
             return {}
 
     def readJsonToDict(self, path) -> dict:
@@ -179,5 +185,6 @@ class FileHandler:
             with open(path, 'r') as file:
                 return json.loads(file)
         except json.JSONDecodeError:
-            fhandler_logger.error(f"Error deconding JSON from file {path}")
+            if self._logging:
+                fhandler_logger.error(f"Error deconding JSON from file {path}")
             return {}

@@ -15,7 +15,7 @@ class Link:
     A Link object should be initialized using the 'create' static method.
     """
     @staticmethod
-    def create(text: str):
+    def create(text: str, logs:bool=False):
         """
         Create a Link object given a string.
         :param link_text: String. The original text of the inline link as str.
@@ -26,6 +26,7 @@ class Link:
             return None
         
         link = Link()
+        link._logging = logs
         link._text = text
         link._type = 'table' if '@' in text else 'roll'
         link._roll = text if link._type == 'roll' else text.split('@')[0]
@@ -71,16 +72,19 @@ class Link:
         """
         # Invaalid type
         if not isinstance(text, str):
-            main_logger.error(f'Expected string, recieved {type(type)}')
+            if self._logging:
+                main_logger.error(f'Expected string, recieved {type(type)}')
             return False
         # invalid dice roll with no table
         if not "@" in text and not dice_utils.is_valid(text):
-            main_logger.error(f'{text} is invalid link.')
+            if self._logging:
+                main_logger.error(f'{text} is invalid link.')
             return False
         if '@' in text and (not dice_utils.is_valid(text.split('@')[0]) and
         not text.split('@')[0].isdigit()):
-            main_logger.error(f'1. Roll on table is not a valid roll notation'
-            + ' or digit.')
+            if self._logging:
+                main_logger.error(f'1. Roll on table is not a valid roll'
+                + ' notation or digit.')
             return False
             
         return True
@@ -98,13 +102,15 @@ class Result:
         """
 
     @staticmethod
-    def  create(text:str):
+    def  create(text:str, logs:bool=False):
         if not isinstance(text, str):
-            main_logger.error("Result object expected string, recieved"
-            + f" {text}.")
+            if logs:
+                main_logger.error("Result object expected string, recieved"
+                + f" {text}.")
             return None
 
         result = Result()
+        result._logging = logs
         result._text = text
         result._links = result.parseLinks(text)
         return result
@@ -273,7 +279,8 @@ class Table:
             valid.
         """
         if not self.resultExists(value):
-            main_logger.error(f"Result Error: '{value}' not found within "
+            if self._logging:
+                main_logger.error(f"Result Error: '{value}' not found within "
                 + f"results for table {self.name}.")
             return None
         return self.results[value].text
@@ -296,7 +303,8 @@ class Table:
         :return: bool.  
         """
         if value not in self.results:
-            main_logger.error(f"Key {value} not found in table {self.name}"
+            if self._logging:
+                main_logger.error(f"Key {value} not found in table {self.name}"
                 + " results.")
             return False
         return True
@@ -311,7 +319,9 @@ class Table:
         # Check to make sure all required keys are in loaded dictionary.
         for key in required_keys:
             if not key in loaded:
-                main_logger.error(f"Table format missing required key {key}.")
+                if self._logging:
+                    main_logger.error(f"Table format missing required key "
+                    + f"{key}.")
                 return False
 
         if not isinstance(loaded['table-name'], str):
@@ -324,8 +334,9 @@ class Table:
         # Check that roll is a valid roll or set to 'length'        
         if (not dice_utils.is_valid(loaded['roll']) and 
         not loaded['roll'] == 'length'):
-            main_logger.error(f"Table key 'roll' must be a valid roll or"
-            + f"'length'. Instead recieved {loaded['roll']}")
+            if self._logging:
+                main_logger.error(f"Table key 'roll' must be a valid roll or"
+                + f"'length'. Instead recieved {loaded['roll']}")
             return False 
 
         return True
@@ -336,12 +347,13 @@ class Resolver:
     results, including nested refereces. Generally only one instance of a
     resolver should be needed for an app.
     """
-    def __init__(self, tables:dict={}):
+    def __init__(self, tables:dict={}, logs:bool=False):
         """
         Initializing the resolver with a mapping of table names to Table
         instances.
         """
         self._tables = tables
+        self._logging = logs
 
     def get(self, result:Result, depth:int=0) -> str:
         """

@@ -1,5 +1,6 @@
 ## 7/1/2024
 app.py: added loadFiles() for loading entire directories of table files.
+merged branch dev to master
 
 ## 6/26/2024
 - app.py initiates correct GUI components

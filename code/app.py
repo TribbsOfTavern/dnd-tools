@@ -37,9 +37,9 @@ class TableRollerApp():
         self.menu_bar = tk.Menu()
         # File Menu Cascade
         self.menu_file = tk.Menu(self.menu_bar, tearoff=0)
-        self.menu_file.add_command(label="Load from File",
+        self.menu_file.add_command(label="Load File",
             command=self.loadFromFile)
-        self.menu_file.add_command(label="Load from Folder",
+        self.menu_file.add_command(label="Load Folder",
             command=self.loadFromDir)
         self.menu_file.add_separator()
         self.menu_file.add_command(label="Exit", command=self.exitApp)

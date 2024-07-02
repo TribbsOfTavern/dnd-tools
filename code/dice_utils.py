@@ -23,7 +23,7 @@ class Die():
     ''' The just a bit overengineered die class 
         default is your standard six-sided die.
     '''
-    def __init__(self) -> None:
+    def __init__(self, logs:bool=False) -> None:
         ''' Initialize the class, set the min and max rolls. 
             Current value defaults to lowest possible roll
 
@@ -35,28 +35,32 @@ class Die():
         self.min = 1
         self.max = 6
         self.current_val = 1
+        self._logging = False
 
     @staticmethod
-    def create(min:int=1, max:int=6):
+    def create(min:int=1, max:int=6, logs:bool=False):
         '''
         create method to correctly validate Die class initialization.
         :return: Die. If initialized. None. If failed to initialize.
         '''
         if not isinstance(min, int) or not isinstance(max, int):
-            main_logger.error(f"Min and Max expected type int. "
+            if logs:
+                main_logger.error(f"Min and Max expected type int. "
                 + f"Given type {type(min)} for min."
                 + f" Given type {type(max)} for max.")
             return None
         if min >= max:
-            main_logger.error("Die class param error. min must be lower than"
+            if logs:
+                main_logger.error("Die class param error. min must be lower than"
                 + f" max. Given min {min} not less than given max {max}.")
             return None
         if max <= min:
-            main_logger.error("Die class param error. max must be higher than"
+            if logs:
+                main_logger.error("Die class param error. max must be higher than"
                 + f" min. Given max {max} not higher than given {min}.")
             return None
 
-        created_die = Die()
+        created_die = Die(logs=logs)
         created_die.min = min
         created_die.max = max
         created_die_current_val = min
@@ -95,13 +99,18 @@ def parse_rolls(rollnote:str) -> Optional[Dict]:
         rolls are found in the roll notation.
     """
     if not isinstance(rollnote, str):
-        main_logger.error(f"Invalid type {type(rollnote)}. Expected type str.")
+        if self._logging:
+            main_logger.error(f"Invalid type {type(rollnote)}. Expected type "
+                + "str.")
         return None
     if not rollnote:
-        main_logger.error(f"Empty str. Expected str containing roll notation.")
+        if self._logging:
+            main_logger.error(f"Empty str. Expected str containing roll" + 
+                "notation.")
         return None
     if not is_valid(rollnote):
-        main_logger.error(f"Invalid roll notation passed {rollnote}.")
+        if self._logging:
+            main_logger.error(f"Invalid roll notation passed {rollnote}.")
         return None
 
     rolls = re_rolls.search(rollnote)
@@ -129,24 +138,31 @@ def parse_keeps(rollnote:str, rolls:List[int]) -> Optional[Dict]:
         in the roll notation.
     """
     if not all(isinstance(r, int) for r in rolls):
-        main_logger.error(f"Invalid type passed in rolls. Expected list of int"
-            + " types.")
+        if self._logging:
+            main_logger.error(f"Invalid type passed in rolls. Expected list of "
+            + "int types.")
         return None
     if not isinstance(rollnote, str):
-        main_logger.error(f"Invalid type {type(rollnote)}. Expected type str.")
+        if self.logging:
+            main_logger.error(f"Invalid type {type(rollnote)}. Expected type "
+            + "str.")
         return None
     if not rollnote:
-        main_logger.error(f"Empty str. Expected str containing roll notation.")
+        if self._logging:
+            main_logger.error(f"Empty str. Expected str containing roll "
+            + "notation.")
         return None
     if not is_valid(rollnote):
-        main_logger.error(f"Invalid roll notation passed {rollnote}.")
+        if self._logging:
+            main_logger.error(f"Invalid roll notation passed {rollnote}.")
         return None
 
     keeps = re_keeps.search(rollnote)
     if not keeps:
         return {'keep': 'kh', 'value': len(rolls)}
     if not (int(keeps.groups()[1]) <= len(rolls)):
-        main_logger.error(f"Length of found groups longer than length of" 
+        if self._logging:
+            main_logger.error(f"Length of found groups longer than length of" 
             + " rolls.")
         return None
 
@@ -166,10 +182,13 @@ def parse_mods(rollnote:str) -> Optional[Dict]:
         the roll notation.
     """
     if not isinstance(rollnote, str):
-        main_logger.error(f"Invalid type {type(rollnote)}. Expected type str.")
+        if self._logging:
+            main_logger.error(f"Invalid type {type(rollnote)}. Expected type "
+            + "str.")
         return None
     if not is_valid(rollnote):
-        main_logger.error(f"Invalid roll notation passed {rollnote}.")
+        if self._logging:
+            main_logger.error(f"Invalid roll notation passed {rollnote}.")
         return None
 
     mods = re_mods.search(rollnote)
@@ -194,15 +213,18 @@ def sum_roll(rollnote:str, verbose:bool=False) -> Union[Dict, int]:
     :return: The result of the roll notation evalluation.
     """ 
     if not isinstance(rollnote, str):
-        main_logger.error("Invalid type passed as roll notation:"
+        if self._logging:
+            main_logger.error("Invalid type passed as roll notation:"
             + f"{type(rollnote)}. Expected type str")
         return None
     if not isinstance(verbose, bool):
-        main_logger.error(f"Invalid type passed as verbose: {type(verbose)}."
+        if self._logging:
+            main_logger.error(f"Invalid type passed as verbose: {type(verbose)}."
             + "Expected tyoe bool")
         return None
     if not is_valid(rollnote):
-        main_logger.error(f"Passed roll notation {rollnote} is not valid.")
+        if self._logging:
+            main_logger.error(f"Passed roll notation {rollnote} is not valid.")
         return None
 
     rolls = parse_rolls(rollnote)
